@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=0">
+    <title>Chapter 11: Phong shading</title>
+    
+    <script>
+        var jewel = {};
+        // parseCollada() needs the jewel.dom.$ function
+        jewel.dom = {};
+        jewel.dom.$ = function(path, parent) {
+            parent = parent || document;
+            return parent.querySelectorAll(path);
+        };
+    </script>
+    <script src="webgl-debug.js"></script>
+    <script src="webgl.js"></script>
+    <script src="requestAnimationFrame.js"></script>
+    
+</head>
+<body>
+
+    <canvas id="webgl" width="512" height="512"></canvas>
+
+    <script>
+
+        var webgl = jewel.webgl,
+            canvas = document.getElementById("webgl"),
+            gl = webgl.createContext(canvas);
+
+        // enable debug mode
+        gl = WebGLDebugUtils.makeDebugContext(gl);
+
+        gl.clearColor(0.15,0.15,0.15,1);
+        gl.enable(gl.DEPTH_TEST);
+
+        var program = setupShaders(),
+            geometry;
+            
+    
+        webgl.loadModel(gl, "sphere.dae", function(geom) {
+            geometry = geom;
+        });
+
+        gl.useProgram(program);
+
+        var aVertex = gl.getAttribLocation(program, "aVertex"),
+            aNormal = gl.getAttribLocation(program, "aNormal");
+        
+        gl.enableVertexAttribArray(aVertex);
+        gl.enableVertexAttribArray(aNormal);
+        
+        webgl.setProjection(gl, program, 60, canvas.width / canvas.height, 0.1, 100);
+        
+        gl.uniform1f(
+            gl.getUniformLocation(program, "uAmbient"),
+            0.12
+        );
+        gl.uniform3f(
+            gl.getUniformLocation(program, "uLightPosition"),
+            10, 5, 0
+        );
+    
+        cycle(); // start rendering
+        
+        function cycle() {
+            var rotation = Date.now() / 1000,
+                axis = [0, 1, 0],
+                position = [0, 0, -5];
+
+            var mv = webgl.setModelView(gl, program, position, rotation, axis);
+            webgl.setNormalMatrix(gl, program, mv);
+            
+            if (geometry) {
+                draw();
+            }
+            
+            requestAnimationFrame(cycle);
+        }
+
+        function draw() {
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+            gl.viewport(0, 0, canvas.width, canvas.height);
+
+            gl.bindBuffer(gl.ARRAY_BUFFER, geometry.vbo);
+            gl.vertexAttribPointer(aVertex, 3, gl.FLOAT, false, 0, 0);
+            
+            gl.bindBuffer(gl.ARRAY_BUFFER, geometry.nbo);
+            gl.vertexAttribPointer(aNormal, 3, gl.FLOAT, false, 0, 0);
+            
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, geometry.ibo);
+            gl.drawElements(gl.TRIANGLES, geometry.num, gl.UNSIGNED_SHORT, 0);
+        }
+        
+        
+        function setupShaders() {
+            var vsource = 
+            "attribute vec3 aVertex;\r\n" +
+            "attribute vec3 aNormal;\r\n" +
+
+            "uniform mat4 uModelView;\r\n" +
+            "uniform mat4 uProjection;\r\n" +
+            "uniform mat3 uNormalMatrix;\r\n" +
+            "uniform vec3 uLightPosition;\r\n" +
+            
+            "varying float vDiffuse;\r\n" +
+            "varying vec3 vColor;\r\n" +
+            
+            "void main(void) {\r\n" +
+            "    vec4 position = uModelView * vec4(aVertex, 1.0);\r\n" +
+            "    vec3 normal = normalize(uNormalMatrix * aNormal);\r\n" +
+            "    vec3 lightDir = uLightPosition - position.xyz;\r\n" +
+            "    lightDir = normalize(lightDir);\r\n" +
+
+            "    vDiffuse = max(dot(normal, lightDir), 0.0);\r\n" +
+            "    vColor = aVertex.xyz * 0.5 + 0.5;\r\n" +
+            
+            "    gl_Position = uProjection * position;\r\n" +
+            "}"
+            ;
+
+            var fsource = 
+            "#ifdef GL_ES\r\n" +
+            "precision mediump float;\r\n" + 
+            "#endif\r\n" +
+
+            "uniform float uAmbient;\r\n" +
+            
+            "varying float vDiffuse;\r\n" +
+            "varying vec3 vColor;\r\n" +
+            
+            "void main(void) {\r\n" +
+            "    gl_FragColor = vec4(vColor * (uAmbient + vDiffuse), 1.0);\r\n" +
+            "}\r\n"
+            ;
+            
+            var vshader = webgl.createShaderObject(gl, gl.VERTEX_SHADER, vsource),
+                fshader = webgl.createShaderObject(gl, gl.FRAGMENT_SHADER, fsource);
+                
+            return webgl.createProgramObject(gl, vshader, fshader);
+        }
+
+        
+        
+    </script>
+    
+    <em style="display:block;margin-top:1em;">
+    Note: This example does not work when running locally (from a file:// url).
+    </em>
+
+</body>
+</html>

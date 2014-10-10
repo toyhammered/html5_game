@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Chapter 8: Gamepad input events</title>
+    <style>
+        #output {
+            width : 800px;
+            height : 500px;
+        }
+    </style>
+</head>
+<body>
+
+<textarea id="output">
+Waiting for gamepads...
+</textarea>
+
+<script>
+    var gpStates = [],
+        output = document.getElementById("output");
+
+    function log(str) {
+        output.value += str + "\r\n";
+        output.scrollTop = output.scrollHeight;
+    }
+        
+    function getGamepads() {
+        if (navigator.gamepads) {
+            return navigator.gamepads;
+        } else if (navigator.getGamepads) {
+            return navigator.getGamepads();
+        } else if (navigator.webkitGetGamepads) {
+            return navigator.webkitGetGamepads();
+        }
+    }
+    
+    function updateGamepadState(gamepad) {
+        var state = gpStates[gamepad.index];
+        for (var i=0;i<gamepad.buttons.length;i++) {
+            if (gamepad.buttons[i] != state.buttons[i]) {
+                log("Gamepad[" + gamepad.index + "] button " + i + " = " + gamepad.buttons[i]);
+                state.buttons[i] = gamepad.buttons[i];
+            }
+        }
+        for (var i=0;i<gamepad.axes.length;i++) {
+            if (gamepad.axes[i] != state.axes[i]) {
+                log("Gamepad[" + gamepad.index + "] axis " + i + " = " + gamepad.axes[i]);
+                state.axes[i] = gamepad.axes[i];
+            }
+        }
+    }
+
+    function pollGamepads() {
+        var gamepads = getGamepads(),
+            i, gamepad, idx;
+        for (i=0;i<gamepads.length;i++) {
+            if (gamepads[i]) {
+                gamepad = gamepads[i];
+                idx = gamepad.index;
+                if (gpStates[idx]) {
+                    if (gpStates[idx].gamepad != gamepad) {
+                        gamepadDisconnected(gpStates[idx]);
+                        gamepadConnected(gamepad);
+                    }
+                } else {
+                    gamepadConnected(gamepad);
+                }
+                updateGamepadState(gamepad);
+            }
+        }
+    }
+
+    function gamepadConnected(gamepad) {
+        gpStates[gamepad.index] = {
+            gamepad: gamepad,
+            buttons: gamepad.buttons,
+            axes: gamepad.axes
+        };
+        log("Gamepad[" + gamepad.index + "] connected: " + gamepad.id);
+    }
+    function gamepadDisconnected(gamepad) {
+        log("Gamepad[" + gamepad.index + "] disconnected: " + gamepad.id);
+        delete gpStates[gamepad.index]
+    }
+    
+    window.addEventListener("gamepadconnected", function(){}, false);
+    
+    setInterval(pollGamepads, 1000 / 60);
+
+</script>
+
+</body>
+</html>

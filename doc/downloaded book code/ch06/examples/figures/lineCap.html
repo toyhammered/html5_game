@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <style>
+        div#main {
+            border : 1px solid black;
+            width : 400px;
+            padding : 10px;
+        }
+        div.line {
+            display : inline-block;
+            width : 120px;
+            margin : 5px;
+        }
+        
+        div.line span {
+            display : inline-block;
+            text-align : center;
+            width : 100%;
+            margin-left : -10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main"></div>
+    <script>
+    
+        function line(lineCap) {
+            var canvas = document.createElement("canvas"),
+                div = document.createElement("div"),
+                span = document.createElement("span"),
+                ctx,
+                x1 = 20, y1 = 80,
+                x2 = 80, y2 = 20;
+            
+            div.className = "line";
+            canvas.width = 100;
+            canvas.height = 100;
+            
+            ctx = canvas.getContext("2d");
+                
+            ctx.strokeStyle = "rgb(0,0,0)";
+            ctx.lineWidth = 30;
+            ctx.lineCap = lineCap;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+            
+            ctx.fillStyle = "green";
+            ctx.beginPath();
+            ctx.arc(x1, y1, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x2, y2, 5, 0, Math.PI * 2);
+            ctx.fill();
+            
+            div.appendChild(canvas);
+            span.innerHTML = lineCap;
+            div.appendChild(span);
+            document.getElementById("main").appendChild(div);
+        }
+    
+    
+        line("butt");
+        line("round");
+        line("square");
+        
+    </script>
+    
+</body>
+</html>

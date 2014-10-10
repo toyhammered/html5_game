@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=0">
+    <title>Chapter 8: Gestures</title>
+    <style>
+        #mydiv {
+            background-color : lightpink;
+            width : 100px;
+            height : 100px;
+            position : absolute;
+            left : 150px;
+            top : 150px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mydiv"></div>
+    
+    <script>
+        var el = document.getElementById("mydiv");
+            
+        el.addEventListener("gesturestart", startGesture, false);
+        
+        function startGesture(e) {
+            var rot = +this.getAttribute("data-rot") || 0,
+                scale = +this.getAttribute("data-scale") || 1;
+
+            function change(e) {
+                this.style.webkitTransform = 
+                    "rotate(" + (rot + e.rotation) + "deg) " +
+                    "scale(" + (scale * e.scale) + ")";
+                e.preventDefault();
+            }
+            function endGesture(e) {
+                this.setAttribute("data-rot", rot + e.rotation);
+                this.setAttribute("data-scale", scale * e.scale);
+                this.removeEventListener("gesturechange", change);
+                this.removeEventListener("gestureend", endGesture);
+            }
+
+            this.addEventListener("gesturechange", change, false);
+            this.addEventListener("gestureend", endGesture, false);
+        }
+
+        document.addEventListener("touchstart", function(e) {
+            e.preventDefault();
+        }, false);
+    </script>
+    
+</body>
+</html>

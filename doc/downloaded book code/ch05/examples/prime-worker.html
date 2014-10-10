@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Chapter 5: Prime Number - Web Worker Edition</title>
+    <script src="prime.js"></script>
+</head>
+<body>
+
+Number (n): <input id="number" value="1125899839733759">
+
+<button id="check">Is n prime?</button><br/><br/>
+
+<button id="click-test">Try to click me!</button>
+
+<script>
+    var button = document.getElementById("check");
+    button.addEventListener("click", function() {
+        var input = document.getElementById("number"),
+            n = parseInt(input.value, 10),
+            worker = new Worker("prime-worker.js");
+        
+        worker.addEventListener("message", function(event) {
+            if (event.data) {
+                alert(n + " is a prime number");
+            } else {
+                alert(n + " is NOT a prime number");
+            }
+        }, false);
+    
+        worker.postMessage(n);
+        
+    }, false);
+
+    var buttonHello = document.getElementById("click-test");
+    buttonHello.addEventListener("click", function() {
+        alert("Hello!");
+    }, false);
+</script>
+
+    <em style="display:block;margin-top:1em;">
+    Note: This example does not work when running locally (from a file:// url).
+    </em>
+
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=0">
+    <title>Chapter 8: Pinch zoom multi-touch</title>
+    <script src="phantomLimb.js"></script>
+    <style>
+        div {
+            width : 120px;
+            height : 120px;
+            position : absolute;
+            margin-left: -75px;
+            margin-tops: -75px;
+        }
+        #zoomer1 {
+            background-color : lightpink;
+            left : 35%;
+            top : 25%;
+        }
+        #zoomer2 {
+            background-color : lightgreen;
+            left : 65%;
+            top : 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="zoomer1"></div>
+    <div id="zoomer2"></div>
+    
+    
+    <script>
+        var zoomer1 = document.getElementById("zoomer1"),
+            zoomer2 = document.getElementById("zoomer2");
+        zoomer1.addEventListener("touchstart", startZoom, false);
+        zoomer2.addEventListener("touchstart", startZoom, false);
+
+        function startZoom(e) {
+            if (e.targetTouches.length != 2) {
+                return;
+            }
+            
+            var touch1 = e.targetTouches[0],
+                touch2 = e.targetTouches[1],
+                dX = touch1.clientX - touch2.clientX,
+                dY = touch1.clientY - touch2.clientY,
+                startDist = Math.sqrt(dX * dX + dY * dY),
+                scale = +this.getAttribute("data-scale") || 1;
+
+            function zoom(e) {
+                if (e.targetTouches.length != 2) {
+                    return;
+                }
+
+                var touch1 = e.targetTouches[0],
+                    touch2 = e.targetTouches[1],
+                    dX = touch1.clientX - touch2.clientX,
+                    dY = touch1.clientY - touch2.clientY,
+                    newDist = Math.sqrt(dX * dX + dY * dY),
+                    newScale = scale * newDist / startDist;
+                this.style.webkitTransform = "scale(" + newScale + ")";
+                this.setAttribute("data-scale", newScale);
+                e.preventDefault();            
+            }
+            
+            function endZoom() {
+                this.removeEventListener("touchmove", zoom);
+                this.removeEventListener("touchend", endZoom);
+            }
+
+            this.addEventListener("touchmove", zoom, false);
+            this.addEventListener("touchend", endZoom, false);
+        };
+
+    </script>
+    
+</body>
+</html>

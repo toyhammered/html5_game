@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Chapter 6: Shadows</title>
+    <style>
+        #canvas {
+            border : 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="350"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d");
+        
+        ctx.shadowColor = "black";
+        ctx.shadowOffsetX = 15;
+        ctx.shadowOffsetY = 15;
+        ctx.shadowBlur = 8;
+        
+        ctx.lineWidth = 6;
+        ctx.strokeStyle = "darkorange";
+        
+        ctx.fillStyle = "sienna";
+        ctx.fillRect(100,50,200,250);
+        ctx.strokeRect(100, 50, 200, 250);
+
+        ctx.fillStyle = "aquamarine";
+        ctx.fillRect(50, 100, 150, 100);
+        ctx.shadowColor = "transparent";
+        ctx.strokeRect(50, 100, 150, 100);
+    </script>
+    
+</body>
+</html>

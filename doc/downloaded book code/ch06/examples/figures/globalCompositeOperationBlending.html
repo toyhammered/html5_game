@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <style>
+        body {
+            width : 500px;
+        }
+        div {
+            display : inline-block;
+            margin : 10px;
+        }
+        span {
+            display : block;
+        }
+        canvas {
+            border : 1px solid black;
+            
+        }
+    </style>
+</head>
+<body>
+    <script>
+    
+        var ops = [
+            "normal", "multiply", "screen", "overlay", "lighten", "color-dodge", 
+            "color-burn", "hard-light", "soft-light", "difference", "exclusion", 
+            "hue", "saturation", "color", "luminosity"
+        ];
+        
+        function drawCircle(ctx, x, y, color) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, 1/3, 0, Math.PI*2, true);
+            ctx.closePath();
+            ctx.fill();
+        }
+        
+        for (var i=0;i<ops.length;i++) {
+
+            var canvas = document.createElement("canvas");
+            canvas.width = 100;
+            canvas.height = 100;
+            var ctx = canvas.getContext("2d");
+
+            ctx.scale(canvas.width, canvas.height);
+
+            var gradient = ctx.createLinearGradient(0,0,1,0);
+            gradient.addColorStop(0,"red");
+            gradient.addColorStop(0.5,"green");
+            gradient.addColorStop(1,"blue");
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0,0,1,1);
+
+            ctx.globalCompositeOperation = ops[i];
+            
+            drawCircle(ctx, 1/3, 1/3, "rgb(255,0,255)");
+            drawCircle(ctx, 2/3, 1/3, "rgb(0,255,255)");
+            drawCircle(ctx, 1/2, 2/3, "rgb(255,255,0)");
+            
+            var opdiv = document.createElement("div"),
+                opname = document.createElement("span");
+                
+            opname.innerHTML = ops[i];
+
+            opdiv.appendChild(canvas)
+            opdiv.appendChild(opname);
+            
+            document.body.appendChild(opdiv);
+            
+        }
+
+    
+    </script>
+    
+</body>
+</html>

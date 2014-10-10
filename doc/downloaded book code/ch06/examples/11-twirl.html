@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <title>Chapter 6: Image Data Twirl</title>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    
+    <script>
+
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d");
+        
+        var image = new Image();
+        
+        image.addEventListener("load", function() {
+            
+            ctx.drawImage(this, 0, 0);
+            
+            var cw = canvas.width, ch = canvas.height,
+                imgData = ctx.getImageData(0,0,cw,ch),
+                newData = ctx.getImageData(0,0,cw,ch),
+                w = imgData.width, h = imgData.height,
+                x, y, sx, sy,
+                dist, angle,
+                idx1, idx2,
+                amount = 20;
+            
+            for (y = 0; y < h; y++) {
+                for (x = 0; x < w; x++) {
+                    sx = x - w / 2;
+                    sy = y - h / 2;
+                
+                    dist = Math.sqrt(sx * sx + sy * sy);
+                    angle = Math.atan2(sy, sx) + dist / w * amount;
+                    
+                    sx = Math.cos(angle) * dist;
+                    sy = Math.sin(angle) * dist;
+                    
+                    sx = Math.floor(sx + w / 2);
+                    sy = Math.floor(sy + h / 2);
+            
+                    sx = Math.min(w-1, Math.max(0, sx));
+                    sy = Math.min(h-1, Math.max(0, sy));
+            
+                    idx1 = (x + y * w) * 4;
+                    idx2 = (sx + sy * w) * 4;
+
+                    newData.data[idx1] = imgData.data[idx2];
+                    newData.data[idx1+1] = imgData.data[idx2+1];
+                    newData.data[idx1+2] = imgData.data[idx2+2];
+                }
+            }
+            
+            ctx.putImageData(newData, 0, 0);
+            
+            
+        }, false);
+        
+        
+        image.src = "html5.png";
+
+        
+    </script>
+    
+    <em style="display:block;margin-top:1em;">
+    Note: This example does not work when running locally (from a file:// url).
+    </em>
+
+</body>
+</html>

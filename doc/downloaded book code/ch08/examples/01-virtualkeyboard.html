@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=0">
+    <title>Chapter 8: Virtual keyboard</title>
+</head>
+<body>
+
+    <button id="toggleButton">Toggle Keyboard</button><br/>
+    <button>Just a button</button><br/>
+    <span id="output"></span>
+
+    <script>
+        function toggleKeyboard() {
+            var kbToggle = document.getElementById("kbToggle");
+            
+            // create element if it doesn't exist
+            if (!kbToggle) {
+                kbToggle = document.createElement("input");
+                kbToggle.id = "kbToggle";
+                kbToggle.style.position = "absolute";
+                kbToggle.style.left = "-1000px";
+                document.body.appendChild(kbToggle);
+
+                // keep the focus
+                kbToggle.addEventListener("blur", function() {
+                    kbToggle.focus();
+                }, false);
+            }
+            
+            // switch classes and focus
+            if (kbToggle.className == "on") {
+                kbToggle.className = "off";
+                kbToggle.blur();
+            } else {
+                kbToggle.className = "on";
+                kbToggle.focus();
+            }
+        }
+        
+        document.addEventListener("keypress", function(e) {
+            document.getElementById("output").innerHTML 
+                = "You pressed: " + String.fromCharCode(e.charCode);
+        }, false);
+        
+    
+        document.getElementById("toggleButton").addEventListener("click", toggleKeyboard, false);
+            
+    
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=0">
+    <title>Chapter 11: Three.js</title>
+    
+    <script src="requestAnimationFrame.js"></script>
+    <script src="three.min.js"></script>
+</head>
+<body>
+    
+<canvas id="scene" height=400 width=400></canvas>
+<script>
+    var canvas = document.getElementById("scene"),
+        ratio = canvas.width / canvas.height,
+        camera = new THREE.PerspectiveCamera(60, ratio, 1, 10000),
+        scene = new THREE.Scene(),
+        renderer = new THREE.WebGLRenderer({ canvas : canvas }),
+        geometry = new THREE.SphereGeometry(300, 40, 20),
+        material = new THREE.MeshPhongMaterial({ color: 0x00dddd, shading : THREE.FlatShading}),
+        mesh = new THREE.Mesh(geometry, material),
+        light = new THREE.DirectionalLight(0xffffff, 1.2);
+        
+    camera.position.set(0, 0, 1000);
+    light.position.set(500, 500, 1000);
+    scene.add(mesh);
+    scene.add(light);
+
+    function render() {
+        requestAnimationFrame(render);
+        mesh.rotation.set(0.3, Date.now() / 800, 0);
+        renderer.render( scene, camera );
+    }
+    
+    render();
+</script>
+
+</body>
+</html>

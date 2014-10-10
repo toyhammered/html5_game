@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,user-scalable=0">
+	<title>Chapter 9: Animation with requestAnimationFrame()</title>
+	<style>
+		body {
+			overflow : hidden;
+		}
+		#anim {
+			position : absolute;
+			width : 100px;
+			height : 100px;
+			background-color : orange;
+		}
+	</style>
+	<script>
+		window.requestAnimationFrame = (function() {
+		return window.requestAnimationFrame
+			|| window.webkitRequestAnimationFrame
+			|| window.mozRequestAnimationFrame
+			|| window.oRequestAnimationFrame
+			|| window.msRequestAnimationFrame
+			|| function(callback, element) {
+				return window.setTimeout(
+					function() {
+						callback(+new Date);
+					}, 1000 / 60
+				);
+			};
+		})();
+	</script>
+</head>
+<body>
+
+	<div id="anim"></div>
+	
+	<script>
+		
+		function animate() {
+            var time = Date.now();
+			var element = document.getElementById("anim");
+
+			element.style.left = (50 + Math.cos(time / 500) * 25) + "%";
+			element.style.top = (50 + Math.sin(time / 500) * 25) + "%";
+
+			requestAnimationFrame(animate);
+		}
+
+		requestAnimationFrame(animate);
+		
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=0">
+    <title>Chapter 11: Textures</title>
+    
+    <script>
+        var jewel = {};
+        // parseCollada() needs the jewel.dom.$ function
+        jewel.dom = {};
+        jewel.dom.$ = function(path, parent) {
+            parent = parent || document;
+            return parent.querySelectorAll(path);
+        };
+    </script>
+    <script src="webgl-debug.js"></script>
+    <script src="webgl.js"></script>
+    <script src="requestAnimationFrame.js"></script>
+
+    
+</head>
+<body>
+
+    <canvas id="webgl" width="512" height="512"></canvas>
+
+    <script>
+
+        var webgl = jewel.webgl,
+            canvas = document.getElementById("webgl"),
+            gl = webgl.createContext(canvas);
+
+        // enable debug mode
+        gl = WebGLDebugUtils.makeDebugContext(gl);
+
+        gl.clearColor(0.15,0.15,0.15,1);
+        gl.enable(gl.DEPTH_TEST);
+
+        var program = setupShaders(),
+            geometry;
+        
+        gl.useProgram(program);
+
+        var aVertex = gl.getAttribLocation(program, "aVertex"),
+            aNormal = gl.getAttribLocation(program, "aNormal");
+        
+        gl.enableVertexAttribArray(aVertex);
+        gl.enableVertexAttribArray(aNormal);
+
+        webgl.loadModel(gl, "sphere.dae", function(geom) {
+            geometry = geom;
+        });
+
+        setupTexture();
+
+        webgl.setProjection(gl, program, 15, canvas.width / canvas.height, 0.1, 100);
+        
+        gl.uniform1f(
+            gl.getUniformLocation(program, "uAmbient"),
+            0.12
+        );
+        gl.uniform1f(
+            gl.getUniformLocation(program, "uShininess"),
+            2.5
+        );
+        gl.uniform3f(
+            gl.getUniformLocation(program, "uLightPosition"),
+            20, 15, -10
+        );
+    
+        cycle(); // start rendering
+        
+        function cycle() {
+            var rotation = Date.now() / 1000,
+                axis = [0, 1, 0],
+                position = [0, 0, -25];
+
+            var mv = webgl.setModelView(gl, program, position, rotation, axis);
+            webgl.setNormalMatrix(gl, program, mv);
+            
+            if (geometry) {
+                draw();
+            }
+            
+            requestAnimationFrame(cycle);
+        }
+
+        function draw() {
+
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+            gl.viewport(0, 0, canvas.width, canvas.height);
+
+            gl.bindBuffer(gl.ARRAY_BUFFER, geometry.vbo);
+            gl.vertexAttribPointer(aVertex, 3, gl.FLOAT, false, 0, 0);
+            
+            gl.bindBuffer(gl.ARRAY_BUFFER, geometry.nbo);
+            gl.vertexAttribPointer(aNormal, 3, gl.FLOAT, false, 0, 0);
+            
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, geometry.ibo);
+            gl.drawElements(gl.TRIANGLES, geometry.num, gl.UNSIGNED_SHORT, 0);
+        }
+        
+        function setupTexture() {
+            var image = new Image();
+            image.addEventListener("load", function() {
+                var texture = webgl.createTextureObject(gl, image);
+                gl.uniform1i(
+                    gl.getUniformLocation(program, "uTexture"), 
+                    "uTexture", 0
+                );
+                gl.activeTexture(gl.TEXTURE0);
+                gl.bindTexture(gl.TEXTURE_2D, texture);
+            }, false);
+            image.src = "earthmap.jpg";
+        }
+        
+        function setupShaders() {
+            var vsource = 
+            "attribute vec3 aVertex;\r\n" +
+            "attribute vec3 aNormal;\r\n" +
+
+            "uniform mat4 uModelView;\r\n" +
+            "uniform mat4 uProjection;\r\n" +
+            "uniform mat3 uNormalMatrix;\r\n" +
+
+            "varying vec4 vPosition;\r\n" +
+            "varying vec3 vNormal;\r\n" +
+            "varying vec3 vOrgNormal;\r\n" +
+            
+            "void main(void) {\r\n" +
+            "    vPosition = uModelView * vec4(aVertex, 1.0);\r\n" +
+            "    vOrgNormal = aNormal;\r\n" +
+            "    vNormal = uNormalMatrix * aNormal;\r\n" +
+            "    gl_Position = uProjection * vPosition;\r\n" +
+            "}"
+            ;
+
+            var fsource = 
+            "#ifdef GL_ES\r\n" +
+            "precision mediump float;\r\n" + 
+            "#endif\r\n" +
+            
+            "uniform sampler2D uTexture;\r\n" +
+            "uniform vec3 uLightPosition;\r\n" +
+            "uniform float uAmbient;\r\n" +
+            "uniform float uShininess;\r\n" +
+
+            "varying vec4 vPosition;\r\n" +
+            "varying vec3 vNormal;\r\n" +
+            "varying vec3 vOrgNormal;\r\n" +
+            
+            "void main(void) {\r\n" +
+            "    vec3 normal = normalize(vNormal);\r\n" +
+            "    vec3 lightDir = normalize(uLightPosition - vPosition.xyz);\r\n" +
+            "    vec3 viewDir = normalize(-vPosition.xyz);\r\n" +
+            "    vec3 reflectDir = reflect(-lightDir, normal);\r\n" +
+            
+            "    float diffuse = max(dot(normal, lightDir), 0.0);\r\n" +
+            "    float specular = max(dot(reflectDir, viewDir), 0.0);\r\n" +
+            "    specular = pow(specular, 15.0);\r\n" +
+            
+            "    float theta = acos(vOrgNormal.y);" +
+            "    float phi = atan(vOrgNormal.z, vOrgNormal.x);" +
+            "    vec2 texCoord = vec2(-phi / 2.0, theta) / 3.14159;" +
+            "    vec4 texColor = texture2D(uTexture, texCoord);\r\n" +
+            
+            "    vec3 color = texColor.rgb * (uAmbient + diffuse + specular);\r\n" +
+            "    gl_FragColor = vec4(color, 1.0);\r\n" +
+            "}\r\n"
+            ;
+            
+            var vshader = webgl.createShaderObject(gl, gl.VERTEX_SHADER, vsource),
+                fshader = webgl.createShaderObject(gl, gl.FRAGMENT_SHADER, fsource);
+                
+            return webgl.createProgramObject(gl, vshader, fshader);
+        }
+
+        
+        
+    </script>
+    
+    <em style="display:block;margin-top:1em;">
+    Note: This example does not work when running locally (from a file:// url).
+    </em>
+
+
+</body>
+</html>

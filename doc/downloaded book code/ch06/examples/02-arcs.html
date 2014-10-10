@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Chapter 6: Arcs and circles</title>
+    <style>
+        #canvas {
+            border : 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    
+    <script>
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d");
+        
+        ctx.fillStyle = "rgba(100,150,200,0.5)";
+        ctx.beginPath();
+        ctx.arc(180, 240, 80, 0.25 * Math.PI, 1.25 * Math.PI, false);
+        ctx.arc(220, 160, 80, 0.25 * Math.PI, 1.25 * Math.PI, true);
+        ctx.closePath();
+        ctx.fill();
+        
+        ctx.strokeStyle = "#664422";
+        ctx.lineWidth = 32;
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.arc(200, 200, 160, 2 * Math.PI, 0, false);
+        ctx.moveTo(200 + 180, 200);
+        ctx.arc(200, 200, 180, 0, 2 * Math.PI, false);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "black";
+        ctx.stroke();
+        
+    </script>
+    
+</body>
+</html>

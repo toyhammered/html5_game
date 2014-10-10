@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <title>Chapter 6: Image Data Pattern</title>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    
+    <script>
+
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d");
+         
+        // switch to multiply blending
+        ctx.globalCompositeOperation = "multiply";
+        // draw magenta circle
+        ctx.fillStyle = "rgb(255,0,255)";
+        ctx.beginPath();
+        ctx.arc(50, 50, 50, 0, Math.PI*2, true);
+        ctx.closePath();
+        ctx.fill();
+        // draw cyan circle
+        ctx.fillStyle = "rgb(0,255,255)";
+        ctx.beginPath();
+        ctx.arc(100, 50, 50, 0, Math.PI*2, true);
+        ctx.closePath();
+        ctx.fill();
+        // draw yellow circle
+        ctx.fillStyle = "rgb(255,255,0)";
+        ctx.beginPath();
+        ctx.arc(75, 100, 50, 0, Math.PI*2, true);
+        ctx.closePath();
+        ctx.fill();
+
+                
+    </script>
+    
+</body>
+</html>

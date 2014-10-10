@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Chapter 8: Touch events</title>
+    <script src="phantomLimb.js"></script>
+
+</head>
+<body>
+
+    Touch X: <input id="touchx"><br/>
+    Touch Y: <input id="touchy">
+    
+    <script>
+        var touchx = document.getElementById("touchx"),
+            touchy = document.getElementById("touchy");
+            
+        document.addEventListener("touchmove", function(e) {
+            var touch = e.touches[0];
+            touchx.value = touch.clientX;
+            touchy.value = touch.clientY;
+            e.preventDefault();
+        }, false);
+    </script>
+    
+</body>
+</html>

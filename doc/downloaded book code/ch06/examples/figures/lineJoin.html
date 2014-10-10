@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <style>
+        div#main {
+            border : 1px solid black;
+            width : 520px;
+            padding : 10px;
+        }
+        div.line {
+            display : inline-block;
+            width : 160px;
+            margin : 5px;
+        }
+        
+        div.line span {
+            display : inline-block;
+            text-align : center;
+            width : 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="main"></div>
+    
+    <script>
+    
+        line("bevel");
+        line("round");
+        line("miter");
+        
+        function line(lineJoin) {
+            var canvas = document.createElement("canvas"),
+                div = document.createElement("div"),
+                span = document.createElement("span"),
+                ctx,
+                x1 = 30, y1 = 120,
+                x2 = 80, y2 = 30;
+
+            div.className = "line";
+            canvas.width = 200;
+            canvas.height = 140;
+            
+            ctx = canvas.getContext("2d");
+            
+            ctx.strokeStyle = "rgb(0,0,0)";
+            ctx.lineWidth = 30;
+            ctx.lineJoin = lineJoin;
+            ctx.miterLimit = 10;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.lineTo(x2 + x2 - x1, y1);
+            ctx.closePath();
+            ctx.stroke();
+            
+            ctx.fillStyle = "green";
+            ctx.beginPath();
+            ctx.arc(x1, y1, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x2, y2, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x2 + x2 - x1, y1, 5, 0, Math.PI * 2);
+            ctx.fill();
+            
+            div.appendChild(canvas);
+            span.innerHTML = lineJoin;
+            div.appendChild(span);
+            document.getElementById("main").appendChild(div);
+        }
+    
+    </script>
+    
+</body>
+</html>

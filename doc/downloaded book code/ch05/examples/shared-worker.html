@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Chapter 5: Prime Number - Web Worker Edition</title>
+    <script src="prime.js"></script>
+</head>
+<body>
+
+
+<textarea cols=80 rows=20 id="output"></textarea>
+
+<script>
+
+    var worker = new SharedWorker("shared-worker.js", "myworker");
+    worker.port.addEventListener("message", function(event) {
+        document.getElementById("output").value += event.data + "\r\n";
+    }, false);
+    worker.port.start();
+    worker.port.postMessage("Hello");
+    
+</script>
+
+    <em style="display:block;margin-top:1em;">
+    Note: This example does not work when running locally (from a file:// url).
+    </em>
+
+</body>
+</html>

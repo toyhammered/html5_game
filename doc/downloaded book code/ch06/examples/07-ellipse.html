@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Chapter 6: Ellipse</title>
+    <style>
+        #canvas {
+            border : 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="450" height="400"></canvas>
+    
+    <script>
+        if (!CanvasRenderingContext2D.prototype.ellipse) {
+            CanvasRenderingContext2D.prototype.ellipse = 
+                function(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise) {
+                    this.translate(x, y);
+                    this.rotate(rotation);
+                    this.scale(radiusX, radiusY);
+                    this.arc(0, 0, 1, startAngle, endAngle, anticlockwise);
+                    this.scale(1/radiusX, 1/radiusY);
+                    this.rotate(-rotation);
+                    this.translate(-x, -y);
+                };
+        }
+            
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d");
+        
+        // draw ellipse
+        ctx.beginPath();
+        ctx.ellipse(225, 200, 150, 80, 0, 0, Math.PI * 2, false);
+        ctx.fillStyle = "rgba(150,50,100,0.5)";
+        ctx.fill();
+        ctx.stroke();
+        
+   
+    </script>
+    
+</body>
+</html>

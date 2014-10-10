@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Chapter 6: Quadratic Bézier curve</title>
+    <style>
+        #canvas {
+            border : 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="250"></canvas>
+    
+    <script>
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d");
+
+        // draw quadratic Bézier curve
+        ctx.beginPath();
+        ctx.moveTo(50,200);
+        ctx.quadraticCurveTo(425,25,450,200);
+        ctx.fillStyle = "rgba(150,50,100,0.5)";
+        ctx.fill();
+        ctx.stroke();
+        
+        // draw control point
+        ctx.strokeStyle = ctx.fillStyle = "rgba(0,0,0,0.5)";
+        ctx.beginPath();
+        ctx.moveTo(450,200);
+        ctx.lineTo(425,25);
+        ctx.lineTo(50,200);
+        ctx.stroke();
+        ctx.fillRect(425-2,25-2,4,4);    
+    
+    </script>
+    
+</body>
+</html>

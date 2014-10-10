@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<title>Chapter 3: Standalone detection</title>
+</head>
+<body>
+	<script>
+
+		if (window.navigator.standalone == true) {
+			alert("You are running the standalone app!");
+		} else if (window.navigator.standalone == false) {
+			alert("You are using app in mobile Safari!");
+		} else {
+			alert("You are using the app in another browser!");
+		}
+
+	</script>
+</body>
+</html>

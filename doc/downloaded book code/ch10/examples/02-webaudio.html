@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=0">
+    <title>Chapter 10: Web Audio API</title>
+    <style>
+        #canvas {
+            border : 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas" width="512" height="512"></canvas>
+    <br/>
+    <audio id="beat" autoplay loop>
+        <source src="beat.mp3" type="audio/mpeg" />
+        <source src="beat.ogg" type="audio/ogg; codecs='vorbis'" />
+    </audio>
+    <audio id="footsteps" autoplay loop>
+        <source src="steps.mp3" type="audio/mpeg" />
+        <source src="steps.ogg" type="audio/ogg; codecs='vorbis'" />
+    </audio>
+
+    <script>
+        function createAudioContext() {
+            if (window.AudioContext) {
+                return new window.AudioContext()
+            } else if (window.webkitAudioContext) {
+                return new window.webkitAudioContext()
+            }
+        }
+
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d"),
+            mouseIsDown = false;
+        
+        var context = createAudioContext(),
+            audio1 = document.getElementById("beat"),
+            audio2 = document.getElementById("footsteps"),
+            mediaNode1 = context.createMediaElementSource(audio1),
+            mediaNode2 = context.createMediaElementSource(audio2),
+            pannerNode1 = context.createPanner(),
+            pannerNode2 = context.createPanner();
+        
+        mediaNode1.connect(pannerNode1);
+        pannerNode1.connect(context.destination);
+        pannerNode1.refDistance = 50;
+
+        mediaNode2.connect(pannerNode2);
+        pannerNode2.connect(context.destination);
+        pannerNode2.refDistance = 50;
+        
+        var soundPos1 = [Math.random() * 512, Math.random() * 512],
+            soundPos2 = [Math.random() * 512, Math.random() * 512],
+            listenPos = [256, 256];
+
+        function updatePositions() {
+            context.listener.setPosition(listenPos[0], listenPos[1], 0);
+            pannerNode1.setPosition(soundPos1[0], soundPos1[1], 0);
+            pannerNode2.setPosition(soundPos2[0], soundPos2[1], 0);
+            updateCanvas();
+        }
+
+        function update(e) {
+            var rect = canvas.getBoundingClientRect(),
+                x = e.clientX - rect.left,
+                y = e.clientY - rect.top;
+            
+            if (e.shiftKey) {
+                soundPos2 = [x, y];
+            } else {
+                soundPos1 = [x, y];
+            }
+            updatePositions();
+        }
+
+
+        function updateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.beginPath();
+            ctx.arc(listenPos[0], listenPos[1], 10, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.fillStyle = "red";
+            ctx.arc(soundPos1[0], soundPos1[1], 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.fillStyle = "blue";
+            ctx.arc(soundPos2[0], soundPos2[1], 5, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+
+        canvas.addEventListener("mousedown", function(e) {
+            mouseIsDown = true;
+            update(e);
+            e.preventDefault();
+        }, false);
+
+        canvas.addEventListener("mouseup", function(e) {
+            mouseIsDown = false;
+        }, false);
+
+        canvas.addEventListener("mousemove", function(e) {
+            if (mouseIsDown) {
+                update(e);
+            }
+        }, false);
+
+        updatePositions();
+    </script>
+
+  </body>
+</html>

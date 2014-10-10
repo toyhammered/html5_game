@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Chapter 6: Cubic Bézier curve</title>
+    <style>
+        #canvas {
+            border : 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="450" height="400"></canvas>
+    
+    <script>
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d");
+    
+        // draw cubic Bézier curve
+        ctx.beginPath();
+        ctx.moveTo(50,200);
+        ctx.bezierCurveTo(150,25,350,350,400,200);
+        ctx.fillStyle = "rgba(150,50,100,0.5)";
+        ctx.fill();
+        ctx.stroke();
+        
+        // draw control points
+        ctx.strokeStyle = ctx.fillStyle = "rgba(0,0,0,0.5)";
+        ctx.beginPath();
+        ctx.moveTo(50,200);
+        ctx.lineTo(150,25);
+        ctx.lineTo(350,350);
+        ctx.lineTo(400,200);
+        ctx.stroke();
+        ctx.fillRect(150-2,25-2,4,4);
+        ctx.fillRect(350-2,350-2,4,4);
+    
+    </script>
+    
+</body>
+</html>

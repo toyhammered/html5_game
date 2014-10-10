@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=0">
+    <title>Chapter 8: Multitouch drag</title>
+    <script src="phantomLimb.js"></script>
+    <style>
+        #dragme1, #dragme2 {
+            background-color : lightpink;
+            width : 100px;
+            height : 100px;
+            position : absolute;
+        }
+        #dragme1 {
+            left : 50px;
+            top : 50px;
+        }
+        #dragme2 {
+            left : 200px;
+            top : 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="dragme1"></div>
+    <div id="dragme2"></div>
+    <script>
+        var el1 = document.getElementById("dragme1"),
+            el2 = document.getElementById("dragme2");
+        
+        el1.addEventListener("touchstart", startDrag, false);
+        el2.addEventListener("touchstart", startDrag, false);
+
+        function startDrag(e) {
+            var touch = e.targetTouches[0],
+                x = touch.clientX,
+                y = touch.clientY,
+                rect = this.getBoundingClientRect();
+
+            function drag(e) {
+                var touch = e.targetTouches[0],
+                    newX = touch.clientX,
+                    newY = touch.clientY;
+                this.style.left = (rect.left + newX - x) + "px";
+                this.style.top = (rect.top + newY - y) + "px";
+                e.preventDefault();
+            }
+            
+            function endDrag() {
+                this.removeEventListener("touchmove", drag);
+                this.removeEventListener("touchend", endDrag);
+            }
+
+            this.addEventListener("touchmove", drag, false);
+            this.addEventListener("touchend", endDrag, false);
+        };
+        
+    </script>
+    
+</body>
+</html>

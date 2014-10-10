@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <style>
+        body {
+            width : 500px;
+        }
+        div {
+            display : inline-block;
+            margin : 10px;
+        }
+        span {
+            display : block;
+        }
+        canvas {
+            border : 1px solid black;
+            
+        }
+    </style>
+</head>
+<body>
+    <script>
+    
+        var ops = [
+            "source-atop", "source-in", "source-out", "source-over",
+            "destination-atop", "destination-in", "destination-out", "destination-over",
+            "lighter", "copy", "xor"
+        ];
+        
+        for (var i=0;i<ops.length;i++) {
+            var canvas = document.createElement("canvas");
+            canvas.width = 98;
+            canvas.height = 98;
+            var ctx = canvas.getContext("2d");
+
+            ctx.fillStyle = "orange";
+            ctx.beginPath();
+            ctx.arc(60,40,30,0,Math.PI * 2);
+            ctx.fill();
+            
+            ctx.globalCompositeOperation = ops[i];
+
+            ctx.fillStyle = "teal";
+            ctx.beginPath();
+            ctx.rect(10,35,50,50);
+            ctx.fill();
+            
+            var opdiv = document.createElement("div");
+            opdiv.appendChild(canvas)
+            
+            var opname = document.createElement("span");
+            opname.innerHTML = ops[i];
+            
+            opdiv.appendChild(opname);
+            
+            document.body.appendChild(opdiv);
+            
+        }
+
+    
+    </script>
+    
+</body>
+</html>

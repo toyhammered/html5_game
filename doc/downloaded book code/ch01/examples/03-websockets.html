@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Chapter 1: WebSockets example</title>
+</head>
+<body>
+
+	<script>
+		var socket = new WebSocket("ws://mygameserver.com:4242/");
+		socket.onopen = function () {
+			socket.send("Hello server!");
+		};
+		socket.onmessage = function(msg) {
+			alert("Server says: " + msg);
+		}
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=0">
+    <title>Chapter 10: Custom controls</title>
+    
+    <style>
+        .progress {
+            height : 20px;
+            width : 250px;
+            border : 1px solid black;
+            margin-bottom : 1em;
+        }
+        .progress .value {
+            height : 100%;
+            width : 0;
+            background : black;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="myaudio" loop>
+        <source src="beat.mp3" type="audio/mpeg" />
+        <source src="beat.ogg" type='audio/ogg; codecs="vorbis"' />
+    </audio>
+
+    <section id="controls">
+        <header><h3>Player Controls</h3></header>
+        <div class="progress"><div class="value"></div></div>
+        <button class="play">Play</button>
+        <button class="pause">Pause</button>
+        <button class="stop">Stop</button>
+        <button class="mute">Mute</button>
+    </section>
+    
+    <script>
+    
+        function $(str) {
+            return document.querySelectorAll(str);
+        };
+        var audio = $("#myaudio")[0];
+        
+        $("button.play")[0].addEventListener("click", function() {
+            audio.play();
+        }, false);
+
+        $("button.pause")[0].addEventListener("click", function() {
+            audio.pause();
+        }, false);
+
+        $("button.stop")[0].addEventListener("click", function() {
+            audio.pause();
+            audio.currentTime = 0;
+        }, false);
+        
+        $("button.mute")[0].addEventListener("click", function() {
+            audio.muted = !audio.muted;
+        }, false);
+
+        $(".progress")[0].addEventListener("click", function(e) {
+            var rect = this.getBoundingClientRect(),
+                pos = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = audio.duration * pos;
+        }, false);
+        
+        function updateProgress() {
+            var prog = $(".progress .value")[0],
+                pos = audio.currentTime / audio.duration * 100;
+            prog.style.width = pos + "%";
+        }
+
+        audio.addEventListener("timeupdate", updateProgress, false);
+    
+    </script>
+    
+    
+</body>
+</html>

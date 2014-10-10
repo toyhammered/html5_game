@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Chapter 1: Audio example</title>
+</head>
+<body>
+<br/>
+
+	<audio controls id="myaudio">
+		<source src="Prelude In E Minor, Op 28.ogg"/>
+		<source src="Prelude In E Minor, Op 28.mp3"/>
+	</audio>
+    
+    <br/><br/>
+    <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" about="http://soundcloud.com/didlybom/suffocation"><span property="dct:title">"Chopin - Suffocation - Prelude in E minor op.28 no.4"</span> (<a rel="cc:attributionURL" property="cc:attributionName" href="http://soundcloud.com/didlybom">didlybom</a>) / <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></div>
+	<script>
+			var audio = document.getElementById("myaudio");
+			document.onkeydown = function(e) {
+				if (e.keyCode == 83) {
+					audio.pause(); // Key pressed was S
+				} else if (e.keyCode == 80) {
+					audio.play(); // Key pressed was P
+				}
+			}
+	</script>
+	
+</body>
+</html>

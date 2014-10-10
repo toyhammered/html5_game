@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Chapter 8: Canvas input events</title>
+</head>
+<body>
+
+    <canvas id="canvas" width="400" height="300"></canvas>
+    
+    <script>
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d");
+            
+        ctx.beginPath();
+        
+        ctx.moveTo(100, 50);
+        ctx.lineTo(250, 200);
+        ctx.lineTo(150, 250);
+        ctx.lineTo(200, 300);
+        ctx.lineTo(50, 250);
+        ctx.lineTo(150, 150);
+        
+        ctx.fillStyle = "teal";
+        ctx.fill();
+        
+        canvas.addEventListener("touchmove", function(e) {
+            hitTest(e.targetTouches[0]);
+            e.preventDefault();
+        }, false);
+        canvas.addEventListener("mousemove", hitTest, false);
+        
+        function hitTest(e) {
+            var rect = canvas.getBoundingClientRect(),
+                x = e.clientX - rect.left,
+                y = e.clientY - rect.top,
+                inPath = ctx.isPointInPath(x, y);
+            ctx.fillStyle = inPath ? "orange" : "teal";
+            ctx.fill();
+        }
+    </script>
+    
+</body>
+</html>

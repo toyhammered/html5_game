@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=0">
+    <title>Chapter 12: Local Storage Reader</title>
+    <style>
+        body {
+            margin : 0;
+            overflow : hidden;
+        }
+        #input {
+            padding : 1em;
+            position : absolute;
+            left : 0;
+            right : 0;
+            width : 100%;
+            height : 100%;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="input" disabled></textarea>
+
+    <script>
+        var input = document.getElementById("input");
+        setInterval(function() {
+            input.value = localStorage.getItem("mytext") || "";
+        }, 50);
+    
+    </script>
+
+</body>
+</html>

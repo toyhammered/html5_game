@@ -1,0 +1,10 @@
+#input, #response {
+    border : 1px solid black;
+    padding : 2px;
+    display : block;
+    width : 600px;
+}
+
+#response {
+    height : 300px;
+}

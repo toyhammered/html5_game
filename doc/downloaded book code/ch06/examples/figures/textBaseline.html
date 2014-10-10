@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <style>
+        #canvas {
+            border : 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width=510 height=140></canvas>
+    
+    <script>
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d");
+
+        testBaseline("alphabetic", 0);
+        testBaseline("middle", 160);
+        testBaseline("bottom", 270);
+        testBaseline("top", 380);
+        
+        function testBaseline(baseline, x) {
+            ctx.font = "36px Times New Roman";
+            ctx.textAlign = "left";
+
+            ctx.fillRect(30, 70, 450, 1);
+            
+            ctx.textBaseline = baseline;
+            ctx.fillText(baseline, 40 + x, 70);
+        }
+    
+    </script>
+    
+</body>
+</html>

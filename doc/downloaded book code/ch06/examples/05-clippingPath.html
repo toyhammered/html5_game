@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Chapter 6: Clipping path</title>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    
+    <script>
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d");
+
+        // make a star-shaped clipping path
+        function makeClippingPath() {
+            ctx.beginPath();
+            ctx.moveTo(270,200);
+            for (var i=0;i<=20;i++) {
+                ctx.lineTo(
+                    200 + Math.cos(i / 10 * Math.PI) * 70 * (i % 2 + 1),
+                    200 + Math.sin(i / 10 * Math.PI) * 70 * (i % 2 + 1)
+                );
+            }
+            ctx.clip();
+        }
+
+        ctx.save();
+        
+        // fill the entire canvas
+        ctx.fillStyle = "sienna";
+        ctx.fillRect(0,0,400,400);
+
+        makeClippingPath();
+        
+        // try to fill the canvas again
+        ctx.fillStyle = "lightsalmon";
+        ctx.fillRect(0,0,400,400);
+        
+        ctx.restore();
+
+    </script>
+    
+</body>
+</html>

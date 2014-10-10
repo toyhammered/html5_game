@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <script src="phonegap.js"></script>
+</head>
+<body>
+    <button id="snap">Take a picture!</button>
+    <script>
+        var button = document.getElementById("snap");
+        button.addEventListener("click", function() {
+            navigator.camera.getPicture(
+                function(data) {
+                    var img = new Image();
+                    img.src = "data:image/jpeg;base64," + data;
+                    document.body.appendChild(img);
+                }, function(errMessage) {
+                    alert("Camera error: " + errMessage);
+                }, {
+                    quality : 70
+                }
+            );
+        }, false);
+    </script>
+</body>
+</html>
