@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8">
+		<title> Name of Game </title>
+
+		<!-- main css style sheet -->
+		<link rel="stylesheet" href="../public/css/main.css" />
+
+		<!-- jewel script sheet -->
+		<script src="../public/script/jewel.js"></script>
+		<script>
+			window.addEventListener("load", function() {
+				jewel.load("../public/script/dom.js", jewel.setup); // make sure to always check file locations, diffrent from book!
+
+			});
+		</script>
+
+
+	</head>
+
+	<body>
+		<div id="game">
+			<!-- game goes here -->
+			<div class="screen" id="splash-screen"></div>
+			<div class="screen" id="main-menu"></div>
+			<div class="screen" id="game-screen"></div>
+			<div class="screen" id="high-scores"></div>
+		</div><!-- end of id: game -->
+
+
+	</body>
