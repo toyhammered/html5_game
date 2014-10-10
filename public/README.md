@@ -30,4 +30,4 @@ Chapter 1 Examples of new HTML 5 Features
 		- Basic example of how local storage works
 	end
 
-#------end of Chapter 1 Examples of new HTML 5 Features-----------#
+end of Chapter 1 Examples of new HTML 5 Features

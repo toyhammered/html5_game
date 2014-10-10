@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+</head>
+
+<body>
+	<script>
+		//Create a new WebSocket object
+		var socket = new WebSocket("ws://mygameserver.com:4200/")
+
+		//Send an initial message to the server
+		socket.onopen = function () {
+			socket.send("Hello server!");
+		};
+
+		// Listen for any data sent to us by the server
+		socket.onmessage = function(msg) {
+			alert("Server says: " + msg);
+		};
+
+
+	</script>
+</body>
+
+
+
+</html>

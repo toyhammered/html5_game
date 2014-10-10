@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+</head>
+
+<body>
+	<audio controls id="myaudio">
+		<source src="Prelude In E Minor, OP. 28.ogg"/> <!-- sound files do not exist -->
+		<source src="Prelude In E Minor, Op. 28.mp3"/> <!-- sound files do not exist -->
+	</audio>
+
+	<script>
+		var audio = document.getElementById("myaudio");
+		document.onkeydown = function(e) {
+			if (e.keyCode == 83) {
+				audio.pause(); // Key pressed was "S"
+			} else if (e.keyCode == 80) {
+				audio.play(); // Key pressed was "P"
+			}
+		};
+	</script>
+
+</body>
+
+
+
+</html>
