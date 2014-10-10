@@ -61,11 +61,30 @@ var jewel = (function() {
 
 	function setup() {
 		console.log("Success!"); // debugging purposes
+
+		jewel.showScreen("splash-screen")
 	}// end of setup
 
+	// hide the active screen (if anyh) and show the screen with the specified id
+	function showScreen (screenId) {
+		var dom = jewel.dom,
+			$ = dom.$,
+			activeScreen = $("#game .screen.active")[0],
+			screen = $("#" + screenId)[0];
+		if (activeScreen) {
+			dom.removeClass(activeScreen, "active");
+		} //end of activeScreen if statement
+		dom.addClass(screen, "active");
+	} // end of showSCreen Function
+
+
+
+
+	// expose public methods
 	return {
 		load: load,
-		setup: setup
+		setup: setup,
+		showScreen: showScreen
 	}; // end of return
 
 

@@ -38,6 +38,7 @@ end of Chapter 1 Examples of new HTML 5 Features
 
 CSS Styles Location:
 	- Main CSS: public/css/main.css
+	- Fontface: public/css/fontfaces.css
 
 JS file Location:
 	- Jewel: public/script/jewel.js
@@ -110,8 +111,49 @@ Chapter 2 Starting the Creation of the Game
 		- minor debugging done
 	end
 
+	Listing 2-11 - Page 34
+		- Switching screens test
+		- any screen that is active is hidden before a new screen is displayed
+	end
+
+	Listing 2-12 - Page 35
+		- Toggling the splash Screen
+		- done by modifying jewel.setup() function
+			-* location is jewel.js
+	end
+
+	Listing 2-13 - Page 36
+		- Creating splash screen in index.html
+		- adding logo and continue button to same page
+
+	Listing 2-14 - Page 37
+		- Adding custom fonts using @fontface
+		- created new file fontfaces.css
+
+	Listing 2-15 - Page 38
+		- added the font-family: Geo to the #game id (this will be changed later on to my own font)
+		- linked fontfaces.css stylesheet
+
+	Listing 2-16 - Page 38
+		- Styling the splash Screen
+	end
+
+	Listing 2-17 - Page 39
+		- Adding a background pattern
+		- cross hatching effect
+	end
+
+	Summary:
+		- foundation of game set up
+		- set up HTML/CSS/JS pages
+		- added dynamic script loading
+		- introduction to framework of game
+		- switching between various game screens
+		- use of web fonts and @fontface
+		- used to create the logo of game (this will be changed to my own later)
 
 
+Chapter 2 End of Starting the Creation of the Game
 
 
 
