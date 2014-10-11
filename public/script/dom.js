@@ -21,11 +21,20 @@ jewel.dom = (function() {
 		el.className = el.className.replace(regex, " ");
 	}// end of removeClass function
 
+	function bind(element, event, handler) {
+		if (typeof element == "string") {
+			element = $(element)[0];
+		} // end of if statement string
+		element.addEventListener(event, handler, false);
+	} // end of function bind
+
+
 	return {
 		$: $,
 		hasClass: hasClass,
 		addClass: addClass,
-		removeClass: removeClass
+		removeClass: removeClass,
+		bind: bind
 	}; // end of return
 
 

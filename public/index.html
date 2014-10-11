@@ -4,18 +4,34 @@
 		<meta charset="UTF-8">
 		<title> Name of Game </title>
 
+		<!-- setting up viewpoint -->
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+
+		<!-- enabling web application mode -->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+
 		<!-- main css style sheet -->
 		<link rel="stylesheet" href="../public/css/main.css" />
 
 		<!-- fontface css style sheet -->
 		<link rel="stylesheet" href="../public/css/fontfaces.css" />
 
+		<!-- checking queries -->
+		<link rel="stylesheet"
+			  href="../public/css/mobile.css"
+			  media="screen and (max-device-width: 768px)
+			  				and (orientation: portrait),
+			  		 screen and (max-device-width: 1024px)
+			  		 		and (orientation: landscape)"/>
+
 		<!-- jewel script sheet -->
 		<script src="../public/script/jewel.js"></script>
 		<script>
 			window.addEventListener("load", function() {
 				jewel.load("../public/script/dom.js", jewel.setup); // make sure to always check file locations, diffrent from book!
-
+				jewel.load("../public/script/dom.js");
+				jewel.load("../public/script/screen.splash.js");
+				jewel.load("../public/script/screen.main-menu.js", jewel.setup);
 			});
 		</script>
 
@@ -29,10 +45,18 @@
 				<h1 class="logo">Game <br/>Name</h1>
 				<span class="continue">Click to Continue</span>
 			</div>
-			<div class="screen" id="main-menu"></div>
+			<div class="screen" id="main-menu">
+				<h2 class="logo">Game<br/>Name</h2>
+				<ul class="menu">
+					<li><button name="game-screen">Play</button></li>
+					<li><button name="high-scores">Highscore</button></li>
+					<li><button name="about">About</button></li>
+					<li><button name="exit-screen">Exit</button></li>
+				</ul>
+			</div><!-- end of div class screen -->
 			<div class="screen" id="game-screen"></div>
 			<div class="screen" id="high-scores"></div>
-		</div><!-- end of id: game -->
+		</div> <!-- end of id: game -->
 
 
 	</body>

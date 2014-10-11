@@ -160,9 +160,13 @@ Chapter 2 End of Starting the Creation of the Game
 
 
 
+Chapter 3 Start Going Mobile
+	
+	Adapting to Small Screen Resolutions:
+		-@link http://www.mydevice.io/devices/
 
-
-
+	
+	
 
 
 
