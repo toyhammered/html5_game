@@ -57,10 +57,18 @@ var jewel = (function() {
 
 	}// end of load
 
+	function isStandalone() {
+		return (window.navigator.standalone !== false);
+	} //end of stand alone function
 
 	function setup() {
-		//console.log("Success!"); // debugging purposes
-		jewel.showScreen("splash-screen")
+		if (isStandalone()) {
+			showScreen("splash-screen");
+		} else {
+			showScreen("install-screen")
+		} // end of stand alone if statement
+		console.log("Success!"); // debugging purposes
+		
 	}// end of setup
 
 	// hide the active screen (if any) and show the screen with the specified id
@@ -85,6 +93,8 @@ var jewel = (function() {
 
 	} // end of showSCreen Function
 
+	
+
 
 
 
@@ -94,7 +104,8 @@ var jewel = (function() {
 		load: load,
 		setup: setup,
 		showScreen: showScreen,
-		screens: {}
+		screens: {},
+		isStandalone: isStandalone
 	}; // end of return
 
 

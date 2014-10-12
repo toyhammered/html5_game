@@ -69,6 +69,7 @@ body {
 
 
 /* Main menu styles */
+
 #main-menu {
     padding-top : 1em;
 }
@@ -103,8 +104,23 @@ ul.menu li button:active {
     background : rgb(30,40,0);
 }
 
+/*----------------------------------------------------------------*/
 
 
+/* Install screen for iOS devices */
+
+#install-screen {
+	padding-top: 0.5em;
+	text-align: center;
+}
+
+#install-screen span {
+	font-size: 0.75em;
+	display: inline-block;
+	padding: 0 0.5em;
+}
+
+/*----------------------------------------------------------------*/
 
 
 

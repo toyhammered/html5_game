@@ -10,6 +10,16 @@
 		<!-- enabling web application mode -->
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 
+		<!-- icons for the game (this shows up on iphone for ei:) -->
+		<link rel="apple-touch-icon-precomposed"
+					href="../public/img/icons/ios-icon.png"/>
+		<link rel="apple-touch-icon-precomposed"
+					href="../public/img/icons/ios-icon-ipad.png"/>
+		<link rel="apple-touch-icon-precomposed"
+					href="../public/img/icons/ios-icon-iphone-retina.png"/>
+		<link rel="apple-touch-icon-precomposed"
+					href="../public/img/icons/ios-icon-ipad-retina.png"/>
+
 		<!-- main css style sheet -->
 		<link rel="stylesheet" href="../public/css/main.css" />
 
@@ -28,10 +38,15 @@
 		<script src="../public/script/jewel.js"></script>
 		<script>
 			window.addEventListener("load", function() {
-				jewel.load("../public/script/dom.js", jewel.setup); // make sure to always check file locations, diffrent from book!
-				jewel.load("../public/script/dom.js");
-				jewel.load("../public/script/screen.splash.js");
-				jewel.load("../public/script/screen.main-menu.js", jewel.setup);
+				jewel.load("../public/script/dom.js"); //jewel.setup); // make sure to always check file locations, diffrent from book!
+
+				if (jewel.isStandalone()) {
+					//jewel.load("../public/script/dom.js");
+					jewel.load("../public/script/screen.splash.js");
+					jewel.load("../public/script/screen.main-menu.js", jewel.setup);
+				} else {
+					jewel.load("../public/script/screen.install.js", jewel.setup);
+				}	
 			});
 		</script>
 
@@ -56,6 +71,14 @@
 			</div><!-- end of div class screen -->
 			<div class="screen" id="game-screen"></div>
 			<div class="screen" id="high-scores"></div>
+			<div class="screen" id="install-screen">
+				<h1 class="logo">Game <br/>Name</h1>
+				<span>
+					Click the <img src="../public/img/install-icon.png"
+										alt="Install icon">
+					button to install the game to your home screen.
+				</span>
+			</div><!-- end of install screen -->
 		</div> <!-- end of id: game -->
 
 
