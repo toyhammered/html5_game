@@ -62,9 +62,24 @@ Img file Location:
 
 #-----------------------------------------------------#
 
+#-----------------------------------------------------#
+#------------ Customizations to be Added -------------#
+
+Inside div (#game) - index.html
+	- Need to add my own game name
+
+Inside main.css - index.html game customization
+	- customize fonts
+	- logo
+	- everything related to the home screen
+
+Inside main.css - main menu styles
+	- customize the main menu
+
+	
 
 
-
+#-----------------------------------------------------#
 
 
 Chapter 2 Starting the Creation of the Game
@@ -324,6 +339,19 @@ Chapter 3 Start Going Mobile
 	end
 
 Chapter 3 End Going Mobile
+
+
+
+
+#--------Part 2 Start--------#
+#--Created the Basic Game ---#
+#----------------------------#
+
+
+Chapter 4 Start Building the Game
+
+
+
 
 
 

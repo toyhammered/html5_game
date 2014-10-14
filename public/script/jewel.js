@@ -5,6 +5,13 @@ var jewel = (function() {
 		numResources = 0,
 		executeRunning = false;
 
+	var settings = { /* settings for the game to check */
+		rows: 8,	 /* this is an 8x8 game */
+		cols: 8,
+		baseScore: 100,	/* 100 points per jewel, can be changed */
+		numJewelTypes: 7 /* number of diffrent jewels */
+	};
+
 	function executeScriptQueue() {
 		var next = scriptQueue[0],
 			first, script;
@@ -118,7 +125,8 @@ var jewel = (function() {
 		setup: setup,
 		showScreen: showScreen,
 		screens: {},
-		isStandalone: isStandalone
+		isStandalone: isStandalone,
+		settings: settings
 	}; // end of return
 
 
