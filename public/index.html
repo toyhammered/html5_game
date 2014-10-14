@@ -20,6 +20,27 @@
 		<link rel="apple-touch-icon-precomposed"
 					href="../public/img/icons/ios-icon-ipad-retina.png"/>
 
+		<!-- specifying a startup image -->
+		<link rel="apple-touch-startup-image"
+			  href="img/ios_startup/ios-startup-748x1024.png"
+			  media="screen and (min-device-width: 768px)
+			  				and (orientation: landscape)" />
+		<link rel="apple-touch-startup-image"
+			  href="img/ios_startup/ios-startup-768x1004.png"
+			  media="screen and (min-device-width: 768px)
+			  				and (orientation: portrait)" />
+		<link rel="apple-touch-startup-image"
+			  href="img/ios_startup/ios-startup-320x460.png"
+			  media="screen and (min-device-width: 768px)
+			  				and (max-device-width: 320px)" />
+
+
+		<!-- Choosing between diffrent status bars (ie: black) for ipad 
+			 Can also choose black-translucent but it is broken in iOS 7 -->
+		<meta name="apple-mobile-web-app-status-bar-style"
+					content="black" />
+
+
 		<!-- main css style sheet -->
 		<link rel="stylesheet" href="../public/css/main.css" />
 

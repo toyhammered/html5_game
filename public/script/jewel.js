@@ -65,9 +65,22 @@ var jewel = (function() {
 		if (isStandalone()) {
 			showScreen("splash-screen");
 		} else {
-			showScreen("install-screen")
+			showScreen("install-screen");
 		} // end of stand alone if statement
 		console.log("Success!"); // debugging purposes
+
+		// disable native touchmove behavior to prevent overscroll
+		jewel.dom.bind(document, "touchmove", function(event) {
+			event.preventDefault();
+		});
+
+		// hide the address bar on Android devices
+		if (/Android/.test(navigator.userAgent)) {
+			$("html")[0].style.height = "200%"
+			setTimeout(function() {
+				window.scrollTo(0,1);
+			}, 0);
+		} //end of if statement for Android test
 		
 	}// end of setup
 
