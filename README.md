@@ -47,6 +47,8 @@ JS file Location:
 	- Install:			public/script/screen.install.js
 	- Main-Menu:		public/script/screen.main-menu.js
 	- Splash-Screen:	public/script/screen.splash.js
+	- Board:			public/script/board.js
+	- Game: 			public/script/game.js
 
 Img file Location:
 	- Icons-Folder		public/img/icons
