@@ -39,6 +39,11 @@ jewel.board = (function() {
 				jewels[x][y] = type;
 			} // end of rows for loop
 		} // end of cols for loop
+
+		//try again if new board has no moves
+		if (!hasMoves()) {
+			fillBoard();
+		} // no moves present 
 	} /* end of fillBoard function */
 
 
@@ -55,6 +60,7 @@ jewel.board = (function() {
 		} // end of if else statement against out of bounds errors 
 	  	  // this means if a jewel is trying to be generated outside of the borders, this will never affect the board
 	} /* end of getJewel function */
+
 
 
 	/* returns the number of jewels in the longest chain
@@ -86,6 +92,27 @@ jewel.board = (function() {
 		return Math.max(left + 1 + right, up + 1 + down); /* returns a number of jewels in the largest chain */
 
 	} /* end of checkChain function */
+
+
+	function swap(x1, y1, x2, y2, callback) {
+		var tmp,
+			events;
+
+		if (canSwap(x1, y1, x2, y2)) {
+
+			// swap the jewels
+			tmp = getJewel(x1, y1);
+			jewels[x1][y1] = getJewel(x2, y2);
+			jewels[x2][y2] = tmp;
+
+			// check the board and get list of events
+			events = check();
+
+			callback(events);
+		} else {
+			callback(false);
+		} // end of if canSwap statement
+	} // end of swap function 
 
 	/* returns true if (xy,y1) can be swapped with (x2,y2) to form a new match */ 
 	function canSwap(x1, y1, x2, y2) {
@@ -176,14 +203,32 @@ jewel.board = (function() {
 				data: score
 			}, {
 				type: "move",
-				data: move
+				data: moved
 			});
+			if (!hasMoves()) {
+				fillBoard();
+				events.push({
+					type: "refill",
+					data: getBoard()
+				});
+			} // loading new board if no more moves available 
 			return check(events);
 		} else {
 			return events;
 		} // end of if statement hadChains
 
 	} /* end of check function */
+
+	// create a copy of the jewel board
+	function getBoard() {
+		var copy = [],
+			x;
+
+		for (x=0; x < cols; x++) {
+			copy[x] = jewels[x].slice(0);
+		}
+		return copy;
+	} // end of getBoard function
 
 	// returns true if at least one match can be made
 	function hasMoves() {
@@ -222,7 +267,9 @@ jewel.board = (function() {
 		/* exposed functions go here */
 		canSwap: canSwap,
 		initialize: initialize,
-		print: print
+		print: print,
+		getBoard: getBoard,
+		swap: swap
 		
 
 	};

@@ -350,6 +350,151 @@ Chapter 3 End Going Mobile
 
 Chapter 4 Start Building the Game
 
+	Listing 4-1 - Page 86
+		- creating the board module 
+		- query function & access of jewels
+	end
+
+	Listing 4-2 - Page 86
+		- loading the board.js file to index.html
+	end
+
+	Listing 4-3 - Page 87
+		- defining the board layout
+		- size, score, jewels
+	end
+
+	Listing 4-4 - Page 88
+		- initializing the board.js
+		- setting up game board 
+	end
+
+	Listing 4-5 - Page 90
+		- modified initialized function
+		- added callback
+	end
+
+	Listing 4-6 - Page 90-91
+		- initialized the colsXrows grid
+		- added the jewels randomly to board
+	end
+
+	Listing 4-7 - Page 91
+		- a random jewel is picked from a random jewel generator
+	end
+
+	Listing 4-8 - Page 91-92
+		- removing initial chains
+			- this means you can't start game with extra points
+		- keeps picking a random jewel until board has no "free points"
+	end
+
+	Listing 4-9 - Page 92
+		- getting jewel type from cordinate
+		- prevents jewels from being created outside 8x8 grid
+			- out of bounds error prevention
+	end
+
+	Listing 4-10 - Page 93-94
+		- checking for chains
+		- checking if swap is valid
+	end
+
+	Listing 4-11 - Page 94-95
+		- validating a swap
+			- if swap is invalid it goes back to original state
+	end
+
+	Listing 4-12 - Page 95
+		- validating adjacent swap
+		- returns true or false depending if what you did is "legal"
+	end
+
+	Listing 4-13 - Page 96
+		- searching for board chains
+		- after initial swap is validated, might make more chains
+	end
+
+	Listing 4-14 - Page 96-97
+		- removing chained jewels
+		- this relates to 4-13 on validated swap
+		- bring in new jewels as old ones are removed
+	end
+
+	Listing 4-15 - Page 98
+		- adding new jewels once old ones are removed
+		- come down from top to fill in space
+	end
+
+	Listing 4-16 - Page 99
+		- awarding the player points depending on combo
+		- points added to score
+	end
+
+	Listing 4-17 - Page 100
+		- checking the board recursively
+		- this means once the board is refilled, it checks if any more chains were created
+	end
+
+	Listing 4-18 - Page 101
+		- checks if there are any more avaiable moves
+			- returns true or false
+		- this is done by the hasMoves() function
+	end
+
+	Listing 4-19 - Page 101
+		- checking if a jewel can move
+		- checks if it can swap if x cordinate isn't less than 1 (that means its off the board)
+	end
+
+	Listing 4-20 - Page 102
+		- triggering a refill
+			- no more moves for player to use
+	end
+
+	Listing 4-21 - Page 102-103
+		- creating a copy of the jewel board
+	end
+
+	Listing 4-22 - Page 103
+		- refilling the board recursively
+			- if the board copied has no moves it refills again
+	end
+
+	Listing 4-23 - Page 104
+		- the actuality of swaping the jewels
+			- if the jewels match they are removed 
+		- new jewels are then added once a swap is validated
+	end
+
+	Listing 4-24 - Page 105
+		- showing public return methods
+		- shows that there are very few ways to alter the game
+			- can be done using swap() method
+	end
+
+
+	Summary:
+		- implement the core of the game mechanics
+		- creating of basic rules
+		- jewel swapping
+		- chains
+		- falling jewels
+		- neatly encapsulated game board
+		- prepare for future multiplayer functionality 
+	end
+
+Chapter 4 End Building the Game
+
+
+
+
+
+
+
+
+
+
 
 
 
