@@ -65,10 +65,18 @@
 					//jewel.load("../public/script/dom.js");
 					jewel.load("../public/script/screen.splash.js");
 					jewel.load("../public/script/screen.main-menu.js", jewel.setup);
+
+					if (jewel.hasWebWorkers()) {
+						jewel.preload("../public/script/board.worker.js");
+						jewel.load("../public/script/board.worker-interface.js", jewel.setup);
+
+					} else {
+						jewel.load("../public/script/board.js", jewel.setup);
+					} // if statement for Web Workers
 				} else {
 					jewel.load("../public/script/screen.install.js", jewel.setup);
-				}	
-				jewel.load("../public/script/board.js", jewel.setup);
+				} // if statement for standAlone
+				
 			});
 		</script>
 

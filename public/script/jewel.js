@@ -12,6 +12,16 @@ var jewel = (function() {
 		numJewelTypes: 7 /* number of diffrent jewels */
 	};
 
+
+	function preload(src) {
+		var image = new Image();
+		image.src = src;
+	}
+
+	function hasWebWorkers() {
+		return ("Worker" in window);
+	} // end of function hasWebWorkers
+
 	function executeScriptQueue() {
 		var next = scriptQueue[0],
 			first, script;
@@ -121,12 +131,14 @@ var jewel = (function() {
 	// expose public methods
 	return {	
 	// remember when adding more returns to put commas "," after each one except the last!!
+		preload: preload,
 		load: load,
 		setup: setup,
 		showScreen: showScreen,
 		screens: {},
 		isStandalone: isStandalone,
-		settings: settings
+		settings: settings,
+		hasWebWorkers: hasWebWorkers
 	}; // end of return
 
 
