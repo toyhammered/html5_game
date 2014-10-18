@@ -489,6 +489,100 @@ Chapter 4 Start Building the Game
 Chapter 4 End Building the Game
 
 
+Chapter 5 Start Delegating Tasks to Web Workers 
+
+	Listing 5-1 - Page 113
+		- just a sample of a shared worker
+	end
+
+	Listing 5-2 - Page 113
+		- another sample of a shared worker script
+	end
+
+	Listing 5-3 - Page 114
+		- example of how to check for prime numbers
+	end
+
+	Listing 5-4 - Page 115
+		- creating the non-worker test page
+	end
+
+	Listing 5-5 - Page 116
+		- created the worker test page
+	end
+
+	Listing 5-6 - Page 116
+		- communicating with the Web Worker
+		- remove delayed when there was no web worker present
+	end
+
+	Listing 5-7 - Page 118
+		- imported the board.js script (start of using web workers)
+	end
+
+	Listing 5-8 - Page 119
+		- shows the basic structure of the message handler for web workers
+			- {
+				id: <number>,
+				command: <string>,
+				data: <any
+			- }
+		end
+
+	Listing 5-9 - Page 120
+		- creating the worker board module
+	end
+
+	Listing 5-10 - Page 120-121
+		- sending the messages to the workers (from the board)
+	end
+
+	Listing 5-11 - Page 121
+		- sending the swap cordinates to the worker
+			- this checks if the swap is legal or not
+	end
+
+	Listing 5-12 - Page 122
+		- added message handler to initialize function
+		- added basic debugging for worker
+		- copied getBoard, print, and getJewel data from board.js
+	end
+
+	Listing 5-13 - Page 123
+		- exposing the public methods 
+	end
+
+	Listing 5-14 - Page 123
+		- loading the board workers and if they are not available having a fallback
+		- feature detection enabled
+	end
+
+	Listing 5-15 - Page 124
+		- detecting support for web workers
+	end
+
+	Listing 5-16 - Page 124
+		- adding preloading to scripts
+		- done same way as before, making script and image so it doesnt execute
+	end
+
+	Listing 5-17 - Page 125
+		- preloading the worker module
+	end
+
+	Summary:
+		- use Web workers to free up the main UI thread
+			- increasing the spead the game runs at
+		- create worker objects
+			- send messages back and forth to each other
+		- implemented a worker based board module
+		- learned about the power of Web Workers
+	end
+
+
+Chapter 5 End Delegating Tasks to Web Workers 
+
+
 
 
 
