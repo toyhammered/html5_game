@@ -584,7 +584,17 @@ Chapter 5 End Delegating Tasks to Web Workers
 
 
 
+Chapter 6 Start Creating Graphics with Canvas
 
+	Summary:
+		- learn how to create diffrent shapes with canvas 
+		- 2d drawing API
+		- paths, shapes, curves, fills, strokes
+		- everything relating to the canvas is done here
+	end
+
+
+Chapter 6 End Creating Graphics with Canvas
 
 
 
