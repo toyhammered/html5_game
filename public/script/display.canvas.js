@@ -1,10 +1,12 @@
 jewel.display = (function() {
 
-	var jewelSprite,
+	var jewels,
+		jewelSprite,
 		canvas, ctx,
 		cols, rows,
 		jewelSize,
 		firstRun = true;
+
 
 	function createBackground() {
 
@@ -44,6 +46,7 @@ jewel.display = (function() {
 		canvas.width = rect.width;
 		canvas.height = rect.height;
 		jewelSize = rect.width / cols;
+		console.log("The Jewel Size in setup() is: " + jewelSize);
 
 		boardElement.appendChild(canvas);
 
@@ -63,11 +66,63 @@ jewel.display = (function() {
 			jewelSprite.src = "../public/img/sprites/jewels" + jewelSize + ".png"; // this src might be wrong, check here if issues with debugging
 			firstRun = false;
 		}
-		callback();
+		callback(); // possible error here page 187ish (less than)
 	} // end of initialize function
 
+
+
+	function drawJewel(type, x, y) {
+		ctx.drawImage(jewelSprite,
+            type * jewelSize, 0, jewelSize, jewelSize,
+            x * jewelSize, y * jewelSize,
+            jewelSize, jewelSize
+        );
+	} // end of function drawJewel
+
+	function redraw(newJewels, callback) {
+		var x, y;
+        jewels = newJewels;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for (x = 0; x < cols; x++) {
+            for (y = 0; y < rows; y++) {
+                drawJewel(jewels[x][y], x, y);
+            } // end of for loop y
+        } // end of for loop x
+        callback();
+	} // end of function redraw
+
+
 	return {
-		initialize: initialize
+		initialize: initialize,
+		redraw: redraw
 	}; // end of return
 
 })(); // end of jewel.display function 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

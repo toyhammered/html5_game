@@ -138,25 +138,25 @@ ul.menu li button:active {
 /* Game screen */
 #game-screen .game-board {
     position : relative;
-    width : 8em;
-    height : 8em;
+    width: 8em;
+    height: 8em;
 }
 
 #game-screen .game-board .board-bg,
 #game-screen .game-board .board {
-    position : absolute;
+    position: absolute;
     left: 0;
     top: 0;
-    width : 100%;
-    height : 100%;
+    /*width: 320px; */ /* 100% some error here, manually fixing */
+    /*height: 320px;*/ /* 100% some error here, manually fixing */
 }
 
 #game-screen .game-board .board {
-    z-index : 10;
+    z-index: 10;
 }
 
 #game-screen .game-board .board-bg {
-    z-index : 0;
+    z-index: 0;
 }
 
 #game-screen .pause-overlay {
