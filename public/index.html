@@ -63,16 +63,19 @@
 
 				if (jewel.isStandalone()) {
 					//jewel.load("../public/script/dom.js");
-					jewel.load("../public/script/screen.splash.js");
-					jewel.load("../public/script/screen.main-menu.js", jewel.setup);
+					jewel.load("../public/script/screen.splash.js", jewel.setup);
+					jewel.load("../public/script/screen.main-menu.js");
+				
 
 					if (jewel.hasWebWorkers()) {
 						jewel.preload("../public/script/board.worker.js");
 						jewel.load("../public/script/board.worker-interface.js", jewel.setup);
 
 					} else {
-						jewel.load("../public/script/board.js", jewel.setup);
+						jewel.load("../public/script/board.js"); // might not need this jewel.setup *refrence page 176*
 					} // if statement for Web Workers
+					jewel.load("../public/script/screen.game.js");
+					jewel.load("../public/script/display.canvas.js");
 				} else {
 					jewel.load("../public/script/screen.install.js", jewel.setup);
 				} // if statement for standAlone
@@ -88,6 +91,9 @@
 			<!-- game goes here -->
 			<div class="screen" id="splash-screen">
 				<h1 class="logo">Game <br/>Name</h1>
+				<div class="progress">
+					<div class="indicator"></div>
+				</div>
 				<span class="continue">Click to Continue</span>
 			</div>
 			<div class="screen" id="main-menu">
@@ -99,7 +105,10 @@
 					<li><button name="exit-screen">Exit</button></li>
 				</ul>
 			</div><!-- end of div class screen -->
-			<div class="screen" id="game-screen"></div>
+			<div class="screen" id="game-screen">
+				<div class="game-board ">
+				</div>
+			</div>
 			<div class="screen" id="high-scores"></div>
 			<div class="screen" id="install-screen">
 				<h1 class="logo">Game <br/>Name</h1>

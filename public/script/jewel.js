@@ -13,6 +13,11 @@ var jewel = (function() {
 	};
 
 
+	function getLoadProgress() {
+		return numResourcesLoaded / numResources;
+	} // preload everything
+
+
 	function preload(src) {
 		var image = new Image();
 		image.src = src;
@@ -131,6 +136,7 @@ var jewel = (function() {
 	// expose public methods
 	return {	
 	// remember when adding more returns to put commas "," after each one except the last!!
+		getLoadProgress: getLoadProgress,
 		preload: preload,
 		load: load,
 		setup: setup,
