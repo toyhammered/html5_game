@@ -596,7 +596,116 @@ Chapter 6 Start Creating Graphics with Canvas
 
 Chapter 6 End Creating Graphics with Canvas
 
+Chapter 7 Start Creating the Game Display
 
+	Listing 7-1 - Page 176
+	    - calling setup script earlier in load proccess
+	    - this is so rest of scripts can load with it
+	end
+
+	Listing 7-2 - Page 176
+	    - creaing the loading progress
+	end
+
+	Listing 7-3 - Page 177
+	    - creating the progress bar on the splash screen
+	end
+
+	Listing 7-4 - Page 177-178
+	    - styling the progress bar
+	end
+
+	Listing 7-5 - Page 178-179
+	    - updating the progress bar
+	end
+
+	Listing 7-6 - Page 180
+	    - the games screen in HTML
+	end
+
+	Listing 7-7 - Page 180
+	    - giving game board correct dimensions in CSS
+	end
+
+	Listing 7-8 - Page 180-181
+	    - The game module for the game-screens
+	end
+
+	Listing 7-9 - Page 181-182
+	    - creating the canvas display module
+	end
+
+	Listing 7-10 - Page 183
+	    - loading the canvas in the html
+	end
+
+	Listing 7-11 - Page 184
+	    - loading the jewel sprites
+	end
+
+	Listing 7-12 - Page 185
+	    - creating the background for the game in js
+	end
+
+	Listing 7-13 - Page 185-186
+	    - css for the game board
+	    - using absolute positioning to show checkered pattern over board
+	end
+
+	Listing 7-14 Page 187
+	    - displaying and redrawing the jewels
+	end
+
+	Listing 7-15 - Page 188
+	    - initializing the first redraw
+	    - this will draw the sprites to the screen
+	end
+
+	Listing 7-16 - Page 188-189
+	    - adding the footer to the html (game screen)
+	    - this is to exit/pause game
+	end
+
+	Listing 7-17 - Page 189-190
+	    - styling the footer
+	end
+
+	Listing 7-18 - Page 190
+	    - responding the the exit button
+	    - showing prompt to ask if you want to quit game
+	end
+
+	Listing 7-19 - Page 191
+	    - adding pause/resume functionality to the game
+	end
+
+	Listing 7-20 - Page 191-192
+	    - Adding the dimming overlay when you pause the game
+	end
+
+	Listing 7-21 - Page 192
+	    - styling the dimming overlay
+	end
+
+	Listing 7-22 - Page 193
+	    - binding the pause event handlers
+	    - this includes resuming/exiting
+	end
+
+
+	Summary:
+	    - created the game display 
+	    - rendering the sprites
+	    - adding the pause/resume functionality/screen dimming
+	    - added progress bar/loading bar
+	end
+
+Chapter 7 End Creating the Game Display
+
+
+Chapter 8 Start Interacting with the Game
+
+Chapter 8 End Interacting with the Game
 
 
 
