@@ -93,28 +93,6 @@ jewel.board = (function() {
 
 	} /* end of checkChain function */
 
-
-	function swap(x1, y1, x2, y2, callback) {
-		var tmp,
-			events;
-
-		if (canSwap(x1, y1, x2, y2)) {
-
-			// swap the jewels
-			tmp = getJewel(x1, y1);
-			jewels[x1][y1] = getJewel(x2, y2);
-			jewels[x2][y2] = tmp;
-
-			// check the board and get list of events
-			events = check();
-
-			callback(events);
-		} else {
-			callback(false);
-		} // end of if canSwap statement
-	} // end of swap function 
-
-	/* returns true if (xy,y1) can be swapped with (x2,y2) to form a new match */ 
 	function canSwap(x1, y1, x2, y2) {
 		var type1 = getJewel(x1,y1),
 			type2 = getJewel(x2,y2),
@@ -139,28 +117,29 @@ jewel.board = (function() {
 
 	} /* end of canSwap function */
 
-	function isAdjacent(x1, y1, x2, y2) {
-		var dx = Math.abs(x1 - x2),
-			dy = Math.abs(y1 - y2);
 
-		return (dx + dy === 1);
-	}
+    // returns true if (x1,y1) is adjacent to (x2,y2)
+    function isAdjacent(x1, y1, x2, y2) {
+        var dx = Math.abs(x1 - x2),
+            dy = Math.abs(y1 - y2);
+        return (dx + dy === 1);
+    } // end of isAdjacent function 
 
-	/* returns a two-dimensional map of chain-lengths */
-	function getChains() {
-		var x, y,
-			chains = [];
+    // returns a two-dimensional map of chain-lengths
+    function getChains() {
+        var x, y,
+            chains = [];
 
-		for (x = 0; x < cols; x++) {
-			chains[x] = [];
-			for (y = 0; y < rows; y++) {
-				chains[x][y] = checkChain(x, y);
-			} // end of for loop for checking rows
-		} // end of for loop for checking cols
-		return chains;
-	} /* end of getChains function */
+        for (x = 0; x < cols; x++) {
+            chains[x] = [];
+            for (y = 0; y < rows; y++) {
+                chains[x][y] = checkChain(x, y);
+            }
+        }
+        return chains;
+    } // end of getChains function 
 
-	function check(events) {
+    function check(events) {
 		var chains = getChains(),
 			hadChains = false, score = 0,
 			removed = [], moved = [], gaps = [];
@@ -219,16 +198,25 @@ jewel.board = (function() {
 
 	} /* end of check function */
 
-	// create a copy of the jewel board
-	function getBoard() {
-		var copy = [],
-			x;
+	function swap(x1, y1, x2, y2, callback) {
+		var tmp,
+			events;
 
-		for (x=0; x < cols; x++) {
-			copy[x] = jewels[x].slice(0);
-		}
-		return copy;
-	} // end of getBoard function
+		if (canSwap(x1, y1, x2, y2)) {
+
+			// swap the jewels
+			tmp = getJewel(x1, y1);
+			jewels[x1][y1] = getJewel(x2, y2);
+			jewels[x2][y2] = tmp;
+
+			// check the board and get list of events
+			events = check();
+
+			callback(events);
+		} else {
+			callback(false);
+		} // end of if canSwap statement
+	} // end of swap function 
 
 	// returns true if at least one match can be made
 	function hasMoves() {
@@ -245,11 +233,22 @@ jewel.board = (function() {
 	// returns true if (x,y) is a valid position and if
 	// the jewel at (x,y) can be swapped with a neighbor
 	function canJewelMove(x, y) {
-		return ((x > 0 && canSwap(x, y, x-1, y )) ||
-			(x < cols-1 && canSwap(x, y, x +1, y )) ||
-			(y > 0 && canSwap(x, y, x, y-1)) ||
-			(y < rows-1 && canSwap(x, y, x, y+1)));
-	} /* end of canJewelMove function */
+        return ((x > 0 && canSwap(x, y, x-1 , y)) ||
+                (x < cols-1 && canSwap(x, y, x+1 , y)) ||
+                (y > 0 && canSwap(x, y, x , y-1)) ||
+                (y < rows-1 && canSwap(x, y, x , y+1)));
+    } // end of canJewelMove function 
+
+	// create a copy of the jewel board
+	function getBoard() {
+		var copy = [],
+			x;
+
+		for (x=0; x < cols; x++) {
+			copy[x] = jewels[x].slice(0);
+		}
+		return copy;
+	} // end of getBoard function
 
 	/* type jewel.board.print() to console to get board data */
 	function print() {
@@ -265,13 +264,12 @@ jewel.board = (function() {
 
 	return {
 		/* exposed functions go here */
-		canSwap: canSwap,
-		initialize: initialize,
-		print: print,
-		getBoard: getBoard,
-		swap: swap
+		initialize : initialize,
+        swap : swap,
+        canSwap : canSwap,
+        getBoard : getBoard,
+        print : print
 		
-
 	};
 
 

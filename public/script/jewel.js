@@ -1,31 +1,40 @@
 var jewel = (function() {
 
+	var settings = { /* settings for the game to check */
+		rows: 8,	 /* this is an 8x8 game */
+		cols: 8,
+		baseScore: 100,	/* 100 points per jewel, can be changed */
+		numJewelTypes: 7, /* number of diffrent jewels */
+
+		controls: {
+
+			// keyboard
+			KEY_UP: "moveUp",
+			KEY_LEFT: "moveLeft",
+			KEY_DOWN: "moveDown",
+			KEY_RIGHT: "moveRight",
+			KEY_ENTER: "selectJewel",
+			KEY_SPACE: "selectJewel",
+
+			// mouse and touch
+			CLICK: "selectJewel",
+			TOUCH: "selectJewel",
+
+			// gamepad
+			BUTTON_A: "selectJewel",
+			LEFT_STICK_UP: "moveUp",
+			LEFT_STICK_DOWN: "moveDown",
+			LEFT_STICK_LEFT: "moveLeft",
+			LEFT_STICK_RIGHT: "moveRight"
+		}
+	};
+
+
 	var scriptQueue = [],
 		numResourcesLoaded = 0,
 		numResources = 0,
 		executeRunning = false;
 
-	var settings = { /* settings for the game to check */
-		rows: 8,	 /* this is an 8x8 game */
-		cols: 8,
-		baseScore: 100,	/* 100 points per jewel, can be changed */
-		numJewelTypes: 7 /* number of diffrent jewels */
-	};
-
-
-	function getLoadProgress() {
-		return numResourcesLoaded / numResources;
-	} // preload everything
-
-
-	function preload(src) {
-		var image = new Image();
-		image.src = src;
-	}
-
-	function hasWebWorkers() {
-		return ("Worker" in window);
-	} // end of function hasWebWorkers
 
 	function executeScriptQueue() {
 		var next = scriptQueue[0],
@@ -54,6 +63,12 @@ var jewel = (function() {
 
 	}// end of executeScriptQueue
 
+
+
+	function getLoadProgress() {
+		return numResourcesLoaded / numResources;
+	} // preload everything
+
 	function load(src, callback) {
 		var image, queueEntry;
 		numResources++;
@@ -79,34 +94,13 @@ var jewel = (function() {
 
 	}// end of load
 
-	function isStandalone() {
-		return (window.navigator.standalone !== false);
-	} //end of stand alone function
 
-	function setup() {
-		if (isStandalone()) {
-			showScreen("splash-screen");
-		} else {
-			showScreen("install-screen");
-		} // end of stand alone if statement
-		console.log("Success!"); // debugging purposes
+	function preload(src) {
+		var image = new Image();
+		image.src = src;
+	}
 
-		// disable native touchmove behavior to prevent overscroll
-		jewel.dom.bind(document, "touchmove", function(event) {
-			event.preventDefault();
-		});
-
-		// hide the address bar on Android devices
-		if (/Android/.test(navigator.userAgent)) {
-			$("html")[0].style.height = "200%"
-			setTimeout(function() {
-				window.scrollTo(0,1);
-			}, 0);
-		} //end of if statement for Android test
-		
-	}// end of setup
-
-	// hide the active screen (if any) and show the screen with the specified id
+		// hide the active screen (if any) and show the screen with the specified id
 	function showScreen (screenId) {
 		var dom = jewel.dom,
 			$ = dom.$,
@@ -128,28 +122,54 @@ var jewel = (function() {
 
 	} // end of showSCreen Function
 
+	function isStandalone() {
+		return (window.navigator.standalone !== false);
+	} //end of stand alone function
+
+
+	function hasWebWorkers() {
+		return ("Worker" in window);
+	} // end of function hasWebWorkers
+
 	
+	function setup() {
+
+		// hide the address bar on Android devices
+		if (/Android/.test(navigator.userAgent)) {
+			$("html")[0].style.height = "200%"
+			setTimeout(function() {
+				window.scrollTo(0,1);
+			}, 0);
+		} //end of if statement for Android test
+
+		// disable native touchmove behavior to prevent overscroll
+		jewel.dom.bind(document, "touchmove", function(event) {
+			event.preventDefault();
+		});
 
 
+		if (isStandalone()) {
+			showScreen("splash-screen");
+		} else {
+			showScreen("install-screen");
+		} // end of stand alone if statement
+		console.log("Success!"); // debugging purposes
+		
+	}// end of setup
 
 
 	// expose public methods
 	return {	
 	// remember when adding more returns to put commas "," after each one except the last!!
-		getLoadProgress: getLoadProgress,
-		preload: preload,
-		load: load,
-		setup: setup,
-		showScreen: showScreen,
-		screens: {},
-		isStandalone: isStandalone,
-		settings: settings,
-		hasWebWorkers: hasWebWorkers
+	getLoadProgress: getLoadProgress,
+        hasWebWorkers: hasWebWorkers,
+        isStandalone: isStandalone,
+        preload: preload,
+        load: load,
+        setup: setup,
+        showScreen : showScreen,
+        settings: settings,
+        screens: {}
 	}; // end of return
-
-
-
-
-
 
 })(); // this will auto execute on load of game

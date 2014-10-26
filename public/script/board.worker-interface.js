@@ -2,6 +2,7 @@ jewel.board = (function() {
 
 	var worker,
 		rows, cols,
+		jewels,
 		messageCount,
 		callbacks;
 

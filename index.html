@@ -65,6 +65,7 @@
 					//jewel.load("../public/script/dom.js");
 					jewel.load("../public/script/screen.splash.js", jewel.setup);
 					jewel.load("../public/script/screen.main-menu.js");
+
 				
 
 					if (jewel.hasWebWorkers()) {
@@ -76,6 +77,7 @@
 					} // if statement for Web Workers
 					jewel.load("../public/script/screen.game.js");
 					jewel.load("../public/script/display.canvas.js");
+					jewel.load("../public/script/input.js");
 				} else {
 					jewel.load("../public/script/screen.install.js", jewel.setup);
 				} // if statement for standAlone

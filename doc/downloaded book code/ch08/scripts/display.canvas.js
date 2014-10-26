@@ -1,11 +1,13 @@
 jewel.display = (function() {
-    var canvas, ctx,
+    var cursor,
+        canvas, ctx,
         cols, rows,
         cursor,
         jewelSize,
         jewels,
         jewelSprite,
         firstRun = true;
+
 
     function createBackground() {
         var background = document.createElement("canvas"),
