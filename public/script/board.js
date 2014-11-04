@@ -66,30 +66,26 @@ jewel.board = (function() {
 	/* returns the number of jewels in the longest chain
 		this includes (x,y) */
 	function checkChain(x, y) {
-		var type= getJewel(x,y),
-			left = 0, right =0,
-			down = 0, up = 0;
-
-		// look right
-		while (type === getJewel(x + right + 1, y)) {
-			right++;
-		} // end of looking right
-
-		// look left
-		while (type === getJewel(x - left - 1, y)) {
-			left++;
-		} // end of looking left
-
-		// look up
-		while (type === getJewel(x, y + up + 1)) {
-			up++;
-		} // end of looking up
-
-		// look down
-		while (type === getJewel(x, y - down - 1)) {
-			down++;
-		} // end of looking down
-		return Math.max(left + 1 + right, up + 1 + down); /* returns a number of jewels in the largest chain */
+		var type = getJewel(x, y),
+            left = 0, right = 0,
+            down = 0, up = 0;
+        // look right
+        while (type === getJewel(x + right + 1, y)) {
+            right++;
+        }
+        // look left
+        while (type === getJewel(x - left - 1, y)) {
+            left++;
+        }
+        // look up
+        while (type === getJewel(x, y + up + 1)) {
+            up++;
+        }
+        // look down
+        while (type === getJewel(x, y - down - 1)) {
+            down++;
+        }
+        return Math.max(left + 1 + right, up + 1 + down);
 
 	} /* end of checkChain function */
 
@@ -98,7 +94,7 @@ jewel.board = (function() {
 			type2 = getJewel(x2,y2),
 			chain;
 
-		if (!isAdjacent(x1, y1, x2 ,y2)) {
+		if (!isAdjacent(x1, y1, x2, y2)) {
 			return false;
 		} // end of isAdjacent if statement 
 
@@ -142,7 +138,8 @@ jewel.board = (function() {
     function check(events) {
 		var chains = getChains(),
 			hadChains = false, score = 0,
-			removed = [], moved = [], gaps = [];
+			removed = [], moved = [], gaps = [],
+			x,y;
 
 		for (var x = 0; x < cols; x++) {
 			gaps[x] = 0;
@@ -230,13 +227,17 @@ jewel.board = (function() {
 		return false;
 	} /* end of hasMoves function */
 
+
 	// returns true if (x,y) is a valid position and if
 	// the jewel at (x,y) can be swapped with a neighbor
 	function canJewelMove(x, y) {
+		//console.log("value of x: ", x, "value of y: ", + y); // THIS WILL MAKE THE GAME CRASH BECAUSE OF INFINITE LOOP
+		
         return ((x > 0 && canSwap(x, y, x-1 , y)) ||
                 (x < cols-1 && canSwap(x, y, x+1 , y)) ||
                 (y > 0 && canSwap(x, y, x , y-1)) ||
                 (y < rows-1 && canSwap(x, y, x , y+1)));
+
     } // end of canJewelMove function 
 
 	// create a copy of the jewel board

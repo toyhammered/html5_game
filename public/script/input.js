@@ -82,6 +82,7 @@ jewel.input = (function() {
 		// prevent default click behavior
 		event.preventDefault();
 
+
 	} // end of handleClick function 
 
 	
@@ -193,13 +194,13 @@ jewel.input = (function() {
 
 	function trigger(action) {
 		var handlers = inputHandlers[action],
-			args = Array.prototype.slice.call(arguments, 1);
-		console.log("Game action: " + action);
-		if (handlers) {
-			for (var i=0;i<handlers.length;i++) {
-				handlers[i].apply(null, args);
-			} // end of handlers for loop
-		} // end of if handlers
+            args = Array.prototype.slice.call(arguments, 1);
+        console.log("Game action: " + action);
+        if (handlers) {
+            for (var i=0;i<handlers.length;i++) {
+                handlers[i].apply(null, args);
+            } // end of handlers for loop
+        } // end of handlers if
 	} // end of trigger function
 
 	

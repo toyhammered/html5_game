@@ -1,11 +1,13 @@
 jewel.display = (function() {
-    var cursor,
-        canvas, ctx,
-        cols, rows,
+    
+    var animations = [],
         cursor,
-        jewelSize,
         jewels,
         jewelSprite,
+        previousCycle,
+        canvas, ctx,
+        cols, rows,
+        jewelSize,
         firstRun = true;
 
 

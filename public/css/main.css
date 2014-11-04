@@ -88,17 +88,68 @@ body {
     padding : 0 0.5em;
 }
 
+/* logo for game */
+
 .logo {
-    font-family : Slackey;
-    font-size : 1.5em;
+    
+   
     line-height : 0.9em;
     text-shadow : 0.03em  0.03em  0.03em rgb(255,255,0),
                  -0.03em -0.03em  0.03em rgb(255,255,0),
                   0.10em  0.15em  0.15em rgb(0,0,0);
-    margin : 0;
+    margin: 0 auto;
+    padding: 0;
     text-align : center;
     color : rgb(70,120,20);
 }
+
+h1.logo {
+    font-family: rwby_stylemedium;
+     
+}
+
+.logo .red {
+    font-size : 1.5em;
+    color: rgb(200,51,39);
+     text-shadow : 0.03em  0.03em  0.03em rgb(128,71,54),
+                 -0.03em -0.03em  0.03em rgb(128,71,54),
+                  0.10em  0.15em  0.15em rgb(0,0,0);
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.logo .white {
+    font-size : 1.5em; 
+    color: white;
+    text-shadow : 0.03em  0.03em  0.03em rgb(154,154,156),
+                 -0.03em -0.03em  0.03em rgb(154,154,156),
+                  0.10em  0.15em  0.15em rgb(0,0,0);
+    margin-right: 3px;
+}
+
+.logo .black {
+    font-size : 1.5em;
+    color: black;
+    text-shadow : 0.03em  0.03em  0.03em rgb(111,111,111),
+                 -0.03em -0.03em  0.03em rgb(111,111,111),
+                  0.10em  0.15em  0.15em rgb(0,0,0);
+    margin-right: 10px;
+
+}
+
+.logo .yellow {
+    font-size : 1.5em;
+    color: rgb(255,217,2);
+    text-shadow : 0.03em  0.03em  0.03em rgb(136,124,48),
+                 -0.03em -0.03em  0.03em rgb(136,124,48),
+                  0.10em  0.15em  0.15em rgb(0,0,0);
+}
+
+.logo .gems {
+    font-size:1em;
+}
+
+/* end of logo styling */
 
 /* Main menu styles */
 #main-menu {
@@ -113,9 +164,10 @@ ul.menu {
 }
 ul.menu li {
     margin : 0.8em 0;
+    margin-top:-2px;
 }
 ul.menu li button {
-    font-family : Slackey, sans-serif;
+    font-family : rwby_stylemedium, sans-serif;
     font-size : 0.6em;
     color : rgb(100,120,0);
     width : 10em;

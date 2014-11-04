@@ -2,9 +2,9 @@ var jewel = {};
 
 importScripts("board.js");
 
-addEventListener("message", function(e) {
+addEventListener("message", function(event) {
 	var board = jewel.board,
-		message = e.data;
+		message = event.data;
 
 	switch (message.command) {
 		case "initialize" :

@@ -2,7 +2,7 @@
 <html lang="en-US">
 	<head>
 		<meta charset="UTF-8">
-		<title> Name of Game </title>
+		<title> RWBY Gems </title>
 
 		<!-- setting up viewpoint -->
 		<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -11,14 +11,25 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 
 		<!-- icons for the game (this shows up on iphone for ei:) -->
-		<link rel="apple-touch-icon-precomposed"
-					href="../public/img/icons/ios-icon.png"/>
-		<link rel="apple-touch-icon-precomposed"
-					href="../public/img/icons/ios-icon-ipad.png"/>
-		<link rel="apple-touch-icon-precomposed"
-					href="../public/img/icons/ios-icon-iphone-retina.png"/>
-		<link rel="apple-touch-icon-precomposed"
-					href="../public/img/icons/ios-icon-ipad-retina.png"/>
+
+		<link rel="shortcut icon" href="public/img/icons/favicon.ico">
+		<link rel="apple-touch-icon" sizes="57x57" href="public/img/icons/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="public/img/icons/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="public/img/icons/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="public/img/icons/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="public/img/icons/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="public/img/icons/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="public/img/icons/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="public/img/icons/apple-touch-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="public/img/icons/apple-touch-icon-180x180.png">
+		<link rel="icon" type="image/png" href="public/img/icons/favicon-192x192.png" sizes="192x192">
+		<link rel="icon" type="image/png" href="public/img/icons/favicon-160x160.png" sizes="160x160">
+		<link rel="icon" type="image/png" href="public/img/icons/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="public/img/icons/favicon-16x16.png" sizes="16x16">
+		<link rel="icon" type="image/png" href="public/img/icons/favicon-32x32.png" sizes="32x32">
+		<meta name="msapplication-TileColor" content="#000000">
+		<meta name="msapplication-TileImage" content="public/img/icons/mstile-144x144.png">
+		<meta name="msapplication-config" content="public/img/icons/browserconfig.xml">
 
 		<!-- specifying a startup image -->
 		<link rel="apple-touch-startup-image"
@@ -42,44 +53,44 @@
 
 
 		<!-- main css style sheet -->
-		<link rel="stylesheet" href="../public/css/main.css" />
+		<link rel="stylesheet" href="public/css/main.css" />
 
 		<!-- fontface css style sheet -->
-		<link rel="stylesheet" href="../public/css/fontfaces.css" />
+		<link rel="stylesheet" href="public/css/fontfaces.css" />
 
 		<!-- checking queries -->
 		<link rel="stylesheet"
-			  href="../public/css/mobile.css"
+			  href="public/css/mobile.css"
 			  media="screen and (max-device-width: 768px)
 			  				and (orientation: portrait),
 			  		 screen and (max-device-width: 1024px)
 			  		 		and (orientation: landscape)"/>
 
 		<!-- jewel script sheet -->
-		<script src="../public/script/jewel.js"></script>
+		<script src="public/script/jewel.js"></script>
 		<script>
 			window.addEventListener("load", function() {
-				jewel.load("../public/script/dom.js"); //jewel.setup); // make sure to always check file locations, diffrent from book!
+				jewel.load("public/script/dom.js"); //jewel.setup); // make sure to always check file locations, diffrent from book!
 
 				if (jewel.isStandalone()) {
 					//jewel.load("../public/script/dom.js");
-					jewel.load("../public/script/screen.splash.js", jewel.setup);
-					jewel.load("../public/script/screen.main-menu.js");
+					jewel.load("public/script/screen.splash.js", jewel.setup);
+					jewel.load("public/script/screen.main-menu.js");
 
 				
 
-					if (jewel.hasWebWorkers()) {
-						jewel.preload("../public/script/board.worker.js");
-						jewel.load("../public/script/board.worker-interface.js", jewel.setup);
+					//if (jewel.hasWebWorkers()) {
+						//jewel.preload("../public/script/board.worker.js");
+						//jewel.load("../public/script/board.worker-interface.js", jewel.setup);
 
-					} else {
-						jewel.load("../public/script/board.js"); // might not need this jewel.setup *refrence page 176*
-					} // if statement for Web Workers
-					jewel.load("../public/script/screen.game.js");
-					jewel.load("../public/script/display.canvas.js");
-					jewel.load("../public/script/input.js");
+					//} else {
+						jewel.load("public/script/board.js"); // might not need this jewel.setup *refrence page 176*
+					//} // if statement for Web Workers
+					jewel.load("public/script/screen.game.js");
+					jewel.load("public/script/display.canvas.js");
+					jewel.load("public/script/input.js");
 				} else {
-					jewel.load("../public/script/screen.install.js", jewel.setup);
+					jewel.load("public/script/screen.install.js", jewel.setup);
 				} // if statement for standAlone
 				
 			});
@@ -92,14 +103,14 @@
 		<div id="game">
 			<!-- game goes here -->
 			<div class="screen" id="splash-screen">
-				<h1 class="logo">Game <br/>Name</h1>
+				<h1 class="logo"><span class="red">R</span><span class="white">W</span><span class="black">B</span><span class="yellow">Y</span> <br/><span class="gems">Gems</span></h1>
 				<div class="progress">
 					<div class="indicator"></div>
 				</div>
 				<span class="continue">Click to Continue</span>
 			</div>
 			<div class="screen" id="main-menu">
-				<h2 class="logo">Game<br/>Name</h2>
+				<h1 class="logo"><span class="red">R</span><span class="white">W</span><span class="black">B</span><span class="yellow">Y</span> <br/><span class="gems">Gems</span></h1>
 				<ul class="menu">
 					<li><button name="game-screen">Play</button></li>
 					<li><button name="high-scores">Highscore</button></li>
@@ -119,9 +130,8 @@
 			</div>
 			<div class="screen" id="high-scores"></div>
 			<div class="screen" id="install-screen">
-				<h1 class="logo">Game <br/>Name</h1>
-				<span>
-					Click the <img src="../public/img/install-icon.png"
+				<h1 class="logo"><span class="red">R</span><span class="white">W</span><span class="black">B</span><span class="yellow">Y</span> <br/><span class="gems">Gems</span></h1>				<span>
+					Click the <img src="public/img/install-icon.png"
 										alt="Install icon">
 					button to install the game to your home screen.
 				</span>
