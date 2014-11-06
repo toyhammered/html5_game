@@ -18,7 +18,6 @@
     font-family: 'rwby_stylemedium';
     src: url('../fonts/rwby_font/rwby_font-webfont.eot');
     src: url('../fonts/rwby_font/rwby_font-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/rwby_font/rwby_font-webfont.woff2') format('woff2'),
          url('../fonts/rwby_font/rwby_font-webfont.woff') format('woff'),
          url('../fonts/rwby_font/rwby_font-webfont.ttf') format('truetype'),
          url('../fonts/rwby_font/rwby_font-webfont.svg#rwby_stylemedium') format('svg');

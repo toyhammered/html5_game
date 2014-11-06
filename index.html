@@ -51,9 +51,14 @@
 		<meta name="apple-mobile-web-app-status-bar-style"
 					content="black" />
 
+		<!-- prevents using -webkit- and all those does automatically -->
+		<script src="public/script/lib/prefixfree.min.js"></script>
 
 		<!-- main css style sheet -->
 		<link rel="stylesheet" href="public/css/main.css" />
+
+		<!-- javascript background -->
+		<!--<script src="public/script/background.js"></script>-->
 
 		<!-- fontface css style sheet -->
 		<link rel="stylesheet" href="public/css/fontfaces.css" />
@@ -77,18 +82,18 @@
 					jewel.load("public/script/screen.splash.js", jewel.setup);
 					jewel.load("public/script/screen.main-menu.js");
 
-				
+					if (jewel.hasWebWorkers()) {
+						jewel.preload("public/script/board.worker.js");
+						jewel.load("public/script/board.worker-interface.js", jewel.setup);
 
-					//if (jewel.hasWebWorkers()) {
-						//jewel.preload("../public/script/board.worker.js");
-						//jewel.load("../public/script/board.worker-interface.js", jewel.setup);
-
-					//} else {
+					} else {
 						jewel.load("public/script/board.js"); // might not need this jewel.setup *refrence page 176*
-					//} // if statement for Web Workers
+					} // if statement for Web Workers
 					jewel.load("public/script/screen.game.js");
+					jewel.load("public/script/requestAnimationFrame.js");
 					jewel.load("public/script/display.canvas.js");
 					jewel.load("public/script/input.js");
+
 				} else {
 					jewel.load("public/script/screen.install.js", jewel.setup);
 				} // if statement for standAlone
@@ -102,6 +107,7 @@
 	<body>
 		<div id="game">
 			<!-- game goes here -->
+
 			<div class="screen" id="splash-screen">
 				<h1 class="logo"><span class="red">R</span><span class="white">W</span><span class="black">B</span><span class="yellow">Y</span> <br/><span class="gems">Gems</span></h1>
 				<div class="progress">
@@ -119,15 +125,21 @@
 				</ul>
 			</div><!-- end of div class screen -->
 			<div class="screen" id="game-screen">
-				<div class="game-board "></div>
-				<footer>
-					<button class="exit">Exit</button>
-					<button class="pause">Pause</button>
-				</footer>
-				<div class="pause-overlay">
-					<div class="pause-text">Pause</div>
-				</div>
-			</div>
+            <div class="game-board">
+                <div class="announcement"></div>
+            </div>
+            <div class="game-info">
+                <label class="level">Level: <span></span></label>
+                <label class="score">Score: <span></span></label>
+            </div>
+            <div class="time progress"><div class="indicator"></div></div>
+            <footer>
+                <button class="exit">Exit</button>
+                <button class="pause">Pause</button>
+            </footer>
+            <div class="pause-overlay">
+                <div class="pause-text">Pause</div>
+            </div>
 			<div class="screen" id="high-scores"></div>
 			<div class="screen" id="install-screen">
 				<h1 class="logo"><span class="red">R</span><span class="white">W</span><span class="black">B</span><span class="yellow">Y</span> <br/><span class="gems">Gems</span></h1>				<span>
@@ -136,6 +148,8 @@
 					button to install the game to your home screen.
 				</span>
 			</div><!-- end of install screen -->
+			<!--<canvas id="background-snow">
+			</canvas>--><!-- end of background-snow -->
 		</div> <!-- end of id: game -->
 
 

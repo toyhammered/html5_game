@@ -87,7 +87,7 @@ jewel.board = (function() {
         }
         return Math.max(left + 1 + right, up + 1 + down);
 
-	} /* end of checkChain function */
+	} // end of checkChains function 
 
 	function canSwap(x1, y1, x2, y2) {
 		var type1 = getJewel(x1,y1),
@@ -111,7 +111,7 @@ jewel.board = (function() {
 
 		return chain;
 
-	} /* end of canSwap function */
+	} // end of canSwap function 
 
 
     // returns true if (x1,y1) is adjacent to (x2,y2)
@@ -136,96 +136,127 @@ jewel.board = (function() {
     } // end of getChains function 
 
     function check(events) {
-		var chains = getChains(),
-			hadChains = false, score = 0,
-			removed = [], moved = [], gaps = [],
-			x,y;
+        var chains = getChains(), 
+            hadChains = false, score = 0,
+            removed = [], moved = [], gaps = [],
+            x, y;
 
-		for (var x = 0; x < cols; x++) {
-			gaps[x] = 0;
-			for (var y = rows-1; y >=0; y--) { // what does this thing at end of for loop mean, some kind of HTML Entity(decimal) &#x2013;
-				if (chains[x][y] > 2 ) {			 // XML numeric entity: &#x2013 is equivilent to (--) 
-					hadChains = true;
-					gaps[x]++;
-					removed.push({
-						x: x, y: y,
-						type: getJewel(x, y)
-					});
+        for (x = 0; x < cols; x++) {
+            gaps[x] = 0;
+            for (y = rows-1; y >= 0; y--) {
+                if (chains[x][y] > 2) {
+                    hadChains = true;
+                    gaps[x]++;
+                    removed.push({
+                        x : x, y : y,
+                        type : getJewel(x, y)
+                    });
+                    // add points to score
+                    score += baseScore *
+                             Math.pow(2, (chains[x][y] - 3));
 
-					// add points to user
-					score += baseScore *
-							 Math.pow(2, (chains[x][y] - 3));
+                } else if (gaps[x] > 0) {
+                    moved.push({
+                        toX : x, toY : y + gaps[x],
+                        fromX : x, fromY : y,
+                        type : getJewel(x, y)
+                    });
+                    jewels[x][y + gaps[x]] = getJewel(x, y);
+                }
+            }
+        }
 
-				} else if (gaps[x] > 0) {
-					moved.push({
-						toX: x, toY: y + gaps[x],
-						fromX: x, fromY: y,
-						type: getJewel(x,y)
-					});
-					jewels[x][y + gaps[x]] = getJewel(x, y);
-				} // else if moved.push
-			} // end of for loop checking y
+        for (x = 0; x < cols; x++) {
+            // fill from top
+            for (y = 0; y < gaps[x]; y++) {
+                jewels[x][y] = randomJewel();
+                moved.push({
+                    toX : x, toY : y,
+                    fromX : x, fromY : y - gaps[x],
+                    type : jewels[x][y]
+                });
+            }
+        }
 
-		} // end of for loop checking x
+        events = events || [];
 
-		events = events || [];
-		// checking the board recursively 
-		if (hadChains) {
-			events.push({
-				type: "remove",
-				data: removed
-			}, {
-				type: "score",
-				data: score
-			}, {
-				type: "move",
-				data: moved
-			});
-			if (!hasMoves()) {
-				fillBoard();
-				events.push({
-					type: "refill",
-					data: getBoard()
-				});
-			} // loading new board if no more moves available 
-			return check(events);
-		} else {
-			return events;
-		} // end of if statement hadChains
+        if (hadChains) {
+            events.push({
+                type : "remove",
+                data : removed
+            }, {
+                type : "score",
+                data : score
+            }, {
+                type : "move",
+                data : moved
+            });
 
-	} /* end of check function */
+            // refill if no more moves
+            if (!hasMoves()) {
+                fillBoard();
+                events.push({
+                    type : "refill",
+                    data : getBoard()
+                });
+            }
 
-	function swap(x1, y1, x2, y2, callback) {
-		var tmp,
-			events;
+            return check(events);
+        } else {
+            return events;
+        }
+    } // end of check function 
 
-		if (canSwap(x1, y1, x2, y2)) {
+	// if possible, swaps (x1,y1) and (x2,y2) and
+    // calls the callback function with list of board events
+    function swap(x1, y1, x2, y2, callback) {
+        var tmp, swap1, swap2,
+            events = [];
+        swap1 = {
+            type : "move",
+            data : [{
+                type : getJewel(x1, y1),
+                fromX : x1, fromY : y1, toX : x2, toY : y2
+            },{
+                type : getJewel(x2, y2),
+                fromX : x2, fromY : y2, toX : x1, toY : y1
+            }]
+        };
+        swap2 = {
+            type : "move",
+            data : [{
+                type : getJewel(x2, y2),
+                fromX : x1, fromY : y1, toX : x2, toY : y2
+            },{
+                type : getJewel(x1, y1),
+                fromX : x2, fromY : y2, toX : x1, toY : y1
+            }]
+        };
+        if (isAdjacent(x1, y1, x2, y2)) {
+            events.push(swap1);
+            if (canSwap(x1, y1, x2, y2)) {
+                tmp = getJewel(x1, y1);
+                jewels[x1][y1] = getJewel(x2, y2);
+                jewels[x2][y2] = tmp;
+                events = events.concat(check());
+            } else {
+                events.push(swap2, {type : "badswap"});
+            }
+            callback(events);
+        }
+    } // end of swap function 
 
-			// swap the jewels
-			tmp = getJewel(x1, y1);
-			jewels[x1][y1] = getJewel(x2, y2);
-			jewels[x2][y2] = tmp;
-
-			// check the board and get list of events
-			events = check();
-
-			callback(events);
-		} else {
-			callback(false);
-		} // end of if canSwap statement
-	} // end of swap function 
-
-	// returns true if at least one match can be made
-	function hasMoves() {
-		for (var x = 0; x < cols; x++) {
-			for (var y = 0; y < rows; y++) {
-				if (canJewelMove(x,y)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	} /* end of hasMoves function */
+     // returns true if at least one match can be made
+    function hasMoves() {
+        for (var x = 0; x < cols; x++) {
+            for (var y = 0; y < rows; y++) {
+                if (canJewelMove(x, y)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    } // end of hasMoves function 
 
 
 	// returns true if (x,y) is a valid position and if
