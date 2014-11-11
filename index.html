@@ -85,9 +85,10 @@
 					if (jewel.hasWebWorkers()) {
 						jewel.preload("public/script/board.worker.js");
 						jewel.load("public/script/board.worker-interface.js", jewel.setup);
-
+						console.log("Web workers enabled");
 					} else {
 						jewel.load("public/script/board.js"); // might not need this jewel.setup *refrence page 176*
+						console.log("Web workers disabled");
 					} // if statement for Web Workers
 					jewel.load("public/script/screen.game.js");
 					jewel.load("public/script/requestAnimationFrame.js");
@@ -95,7 +96,9 @@
 					jewel.load("public/script/input.js");
 
 				} else {
+
 					jewel.load("public/script/screen.install.js", jewel.setup);
+					//alert("mobile loaded!");
 				} // if statement for standAlone
 				
 			});
@@ -115,6 +118,15 @@
 				</div>
 				<span class="continue">Click to Continue</span>
 			</div>
+			<div class="screen" id="install-screen">
+           <h1 class="logo"><span class="red">R</span><span class="white">W</span><span class="black">B</span><span class="yellow">Y</span> <br/><span class="gems">Gems</span></h1>
+            <span>
+                Click the <img src="public/img/install-icon.png"
+                               alt="Install icon"> 
+                button to install the game to your home screen.
+           	</span>
+        	</div><!-- end of install screen -->
+
 			<div class="screen" id="main-menu">
 				<h1 class="logo"><span class="red">R</span><span class="white">W</span><span class="black">B</span><span class="yellow">Y</span> <br/><span class="gems">Gems</span></h1>
 				<ul class="menu">
@@ -141,13 +153,7 @@
                 <div class="pause-text">Pause</div>
             </div>
 			<div class="screen" id="high-scores"></div>
-			<div class="screen" id="install-screen">
-				<h1 class="logo"><span class="red">R</span><span class="white">W</span><span class="black">B</span><span class="yellow">Y</span> <br/><span class="gems">Gems</span></h1>				<span>
-					Click the <img src="public/img/install-icon.png"
-										alt="Install icon">
-					button to install the game to your home screen.
-				</span>
-			</div><!-- end of install screen -->
+			 
 			<!--<canvas id="background-snow">
 			</canvas>--><!-- end of background-snow -->
 		</div> <!-- end of id: game -->
