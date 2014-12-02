@@ -175,7 +175,7 @@ jewel.display = (function() {
 		// boardElement.appendChild(canvas); possible duplicate?
 
 		/* appending the background we just created in createBackground */
-		boardElement.appendChild(createBackgroundSnow());
+		//boardElement.appendChild(createBackgroundSnow());
 		boardElement.appendChild(createBackground());
 		boardElement.appendChild(canvas); 
 		/*-------------------------------------------------------------*/
@@ -206,7 +206,7 @@ jewel.display = (function() {
 			setup();
 			jewelSprite = new Image();
 			jewelSprite.addEventListener("load", callback, false);
-			jewelSprite.src = "public/img/sprites/jewels" + jewelSize + ".png"; // this src might be wrong, check here if issues with debugging
+			jewelSprite.src = "public/img/sprites/jewels" + jewelSize + ".svg"; // this src might be wrong, check here if issues with debugging
 			firstRun = false;
 		} else {
 			callback(); // possible error here page 187ish (less than)
@@ -260,7 +260,8 @@ jewel.display = (function() {
 			t1 = (Math.sin(time / 200) + 1) / 2,
 			t2 = (Math.sin(time / 400) + 1) /2;
 
-
+		console.log(x + " " + y);
+		
 		clearCursor();
 
 		if (cursor.selected) {
@@ -278,6 +279,7 @@ jewel.display = (function() {
 			0.9 * jewelSize, 0.9 * jewelSize
 		);
 		ctx.restore();
+
 
 	} // end of renderCursor function
 

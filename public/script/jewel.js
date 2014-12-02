@@ -7,7 +7,7 @@ var jewel = (function() {
         baseLevelScore: 1500,
         baseLevelExp: 1.05,
         baseLevelTimer: 60000,
-        numJewelTypes: 7,
+        numJewelTypes: 8,
         controls: {
             // keyboard
             KEY_UP: "moveUp",

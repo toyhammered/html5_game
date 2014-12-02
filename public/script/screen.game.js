@@ -21,7 +21,7 @@ jewel.screens["game-screen"] = (function() {
 		}; // end of gameState object 
 		updateGameInfo();
 		jewel.audio.initialize();
-
+		
         board.initialize(function() {
             display.initialize(function() {
                 cursor = {
@@ -261,6 +261,7 @@ jewel.screens["game-screen"] = (function() {
 		);
 		if (confirmed) {
 			jewel.showScreen("main-menu");
+
 		} else {
 			resumeGame();
 		} // end of if confirmed 

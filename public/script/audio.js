@@ -22,11 +22,13 @@ jewel.audio = (function() {
 			];
 		for (var i=0; i<types.length;i++) {
 			if (audio.canPlayType(types[i][1]) == "probably") {
+			
 				return types[i][0];
 			}
 		} // end of for loop checking types of audio
 		for (i=0;i<types.length;i++) {
             if (audio.canPlayType(types[i][1]) == "maybe") {
+            	
                 return types[i][0];
             }
         }
@@ -35,26 +37,32 @@ jewel.audio = (function() {
 
 	function createAudio(name) {
 		var el = new Audio("public/sounds/" + name + "." + extension); // check file location is correct
+
+
 		jewel.dom.bind(el, "ended", cleanActive);
 		sounds[name] = sounds[name] || [];
-
 		sounds[name].push(el);
+
 		return el;
+
 	} // end of createAudio function
 
 	function getAudioElement(name) {
 		if (sounds[name]) {
 			for (var i=0,n=sounds[name].length;i<n;i++) {
 				if (sounds[name][i].ended) {
+
 					return sounds[name][i];
 				} // end of if sounds name
 			} // end of for loop
 		}
 		return createAudio(name);
+
 	} // end of getAudioElement function
 
 	function play(name) {
 		var audio = getAudioElement(name);
+
 		audio.play();
 		activeSounds.push(audio);
 	} // end of play function
@@ -64,8 +72,15 @@ jewel.audio = (function() {
 			activeSounds[i].stop();
 		} // stopping active Sounds
 		activeSounds.length = 0;
+		
 
 	} // end of stop function
+
+	function bgMusicStop() {
+		//audio.pause("red_like_roses");
+	}
+
+	
 
 
 	function cleanActive() {
