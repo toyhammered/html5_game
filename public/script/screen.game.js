@@ -18,19 +18,38 @@ jewel.screens["game-screen"] = (function() {
 			timer: 0, // setTimeout reference
 			startTime: 0, // time at start of level
 			endTime: 0 // time to game over
-		}; // end of gameState object 
+		}; // end of gameState object
+
+		var activeGame = storage.get("activeGameData"),
+			useActiveGame,
+			startJewels;
+
+		if (activeGame) {
+			useActiveGame = window.confirm(
+					"Do you want to continue your previous game?"
+				);
+			if (useActiveGame) {
+				var now = Date.now();
+				gameState.level = activeGame.level;
+				gameState.score = activeGame.score;
+				gameState.startTime = now - activeGame.time;
+				gameState.endTime = activeGame.endTime;
+				startJewels = activeGame.jewels;
+			}
+
+		} // end of if activeGame statement
 		updateGameInfo();
 		jewel.audio.initialize();
 		
-        board.initialize(function() {
+        board.initialize(startJewels, function() {
             display.initialize(function() {
-                cursor = {
-                    x : 0,
-                    y : 0,
-                    selected : false
-                };
+                cursor = { x : 0, y : 0, selected : false };
                 display.redraw(board.getBoard(), function() {
-                    advanceLevel();
+                    if (useActiveGame) {
+                        setLevelTimer();
+                    } else {
+                        advanceLevel();
+                    }
                 });
             });
         });
@@ -149,6 +168,7 @@ jewel.screens["game-screen"] = (function() {
 	} // end of playBoardEvents function
 
 	function gameOver() {
+		jewel.storage.set("activeGameData", null);
 		jewel.audio.play("gameover");
 		jewel.display.gameOver(function() {
 			announce("Game Over");
@@ -257,9 +277,10 @@ jewel.screens["game-screen"] = (function() {
 	function exitGame() {
 		pauseGame();
 		var confirmed = window.confirm(
-			"Do you want to return tothe main menu?"
+			"Do you want to return to the main menu?"
 		);
 		if (confirmed) {
+			saveGameData();
 			jewel.showScreen("main-menu");
 
 		} else {
@@ -292,6 +313,19 @@ jewel.screens["game-screen"] = (function() {
 		}
 		startGame();
 	} // end of run function
+
+
+
+	function saveGameData() {
+		jewel.storage.set("activeGameData", {
+			level: gameState.level,
+			score: gameState.score,
+			time: Date.now() - gameState.startTime,
+			endTime: gameState.endTime,
+			jewels: jewel.board.getBoard()
+		}); 
+	} // end of saveGameData function 
+
 
 	return {
 		run: run
