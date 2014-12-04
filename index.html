@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en-US">
+<html manifest="cache.appcache" lang="en-US">
 	<head>
 		<meta charset="UTF-8">
 		<title> RWBY Gems </title>
@@ -74,38 +74,32 @@
 		<!-- jewel script sheet -->
 		<script src="public/script/jewel.js"></script>
 		<script>
-			window.addEventListener("load", function() {
-				jewel.load("public/script/dom.js"); //jewel.setup); // make sure to always check file locations, diffrent from book!
+        window.addEventListener("load", function() {
+            jewel.load("public/script/dom.js");
 
-				if (jewel.isStandalone()) {
-					//jewel.load("../public/script/dom.js");
-					jewel.load("public/script/screen.splash.js", jewel.setup);
-					jewel.load("public/script/screen.main-menu.js");
-					jewel.load("public/script/storage.js");
+            if (jewel.isStandalone()) {
+                jewel.load("public/script/screen.splash.js", jewel.setup);
+                jewel.load("public/script/screen.main-menu.js");
 
-					if (jewel.hasWebWorkers()) {
-						jewel.preload("public/script/board.worker.js");
-						jewel.load("public/script/board.worker-interface.js", jewel.setup);
-						console.log("Web workers enabled");
-					} else {
-						jewel.load("public/script/board.js"); // might not need this jewel.setup *refrence page 176*
-						console.log("Web workers disabled");
-					} // if statement for Web Workers
-					jewel.load("public/script/screen.game.js");
-					jewel.load("public/script/requestAnimationFrame.js");
-					jewel.load("public/script/display.canvas.js");
-					jewel.load("public/script/input.js");
-					jewel.load("public/script/audio.js");
+                if (jewel.hasWebWorkers()) {
+                    jewel.preload("public/script/board.worker.js");
+                    jewel.load("public/script/board.worker-interface.js");
+                } else {
+                    jewel.load("public/script/board.js");
+                }
 
-				} else {
-
-					jewel.load("public/script/screen.install.js", jewel.setup);
-					//alert("mobile loaded!");
-				} // if statement for standAlone
-				
-			});
-		</script>
-
+                jewel.load("public/script/screen.game.js");
+                jewel.load("public/script/screen.high-scores.js");
+                jewel.load("public/script/requestAnimationFrame.js");
+                jewel.load("public/script/display.canvas.js");
+                jewel.load("public/script/input.js");
+                jewel.load("public/script/audio.js");
+                jewel.load("public/script/storage.js");
+            } else {
+                jewel.load("public/script/screen.install.js", jewel.setup);
+            }
+        });
+    </script>
 
 	</head>
 
@@ -120,6 +114,7 @@
 				</div>
 				<span class="continue">Click to Continue</span>
 			</div>
+
 			<div class="screen" id="install-screen">
            <h1 class="logo"><span class="red">R</span><span class="white">W</span><span class="black">B</span><span class="yellow">Y</span> <br/><span class="gems">Gems</span></h1>
             <span>
@@ -138,26 +133,39 @@
 					<li><button name="exit-screen">Exit</button></li>
 				</ul>
 			</div><!-- end of div class screen -->
+
 			<div class="screen" id="game-screen">
-            <div class="game-board">
-                <div class="announcement"></div>
-            </div>
-            <div class="game-info">
-                <label class="level">Level: <span></span></label>
-                <label class="score">Score: <span></span></label>
-            </div>
-            <div class="time progress"><div class="indicator"></div></div>
-            <footer>
-                <button class="exit">Exit</button>
-                <button class="pause">Pause</button>
-            </footer>
-            <div class="pause-overlay">
-                <div class="pause-text">Pause</div>
-            </div>
-			<div class="screen" id="high-scores"></div>
+	            <div class="game-board">
+	                <div class="announcement"></div>
+	            </div>
+
+	            <div class="game-info">
+	                <label class="level">Level: <span></span></label>
+	                <label class="score">Score: <span></span></label>
+	            </div>
+
+	            <div class="time progress"><div class="indicator"></div></div>
+	            <footer>
+	                <button class="exit">Exit</button>
+	                <button class="pause">Pause</button>
+	            </footer>
+
+	            <div class="pause-overlay">
+	                <div class="pause-text">Pause</div>
+	            </div>
+	        </div>
+	        
+			<div class="screen" id="high-scores">
+				<h2 class="logo">High score</h2>
+				<ol class="score-list">
+					
+				</ol>
+				<footer>
+					<button class="back">Back</button>
+				</footer>
+			</div>
+
 			 
-			<!--<canvas id="background-snow">
-			</canvas>--><!-- end of background-snow -->
 		</div> <!-- end of id: game -->
 
 

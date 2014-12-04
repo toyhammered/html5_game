@@ -94,7 +94,7 @@ var jewel = (function() {
 	}
 
 	// hide the active screen (if any) and show the screen with the specified id
-	function showScreen (screenId) {
+	function showScreen(screenId) {
 		var dom = jewel.dom,
 			$ = dom.$,
 			activeScreen = $("#game .screen.active")[0],

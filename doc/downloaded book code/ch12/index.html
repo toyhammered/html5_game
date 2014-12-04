@@ -37,7 +37,7 @@
             if (jewel.isStandalone()) {
                 jewel.load("scripts/screen.splash.js", jewel.setup);
                 jewel.load("scripts/screen.main-menu.js");
-                if (jewel.hasWebWorkers()) {
+                if (!jewel.hasWebWorkers()) {
                     jewel.preload("scripts/board.worker.js");
                     jewel.load("scripts/board.worker-interface.js");
                 } else {
@@ -105,7 +105,7 @@
             </div>
         </div>
         <div class="screen" id="high-scores">
-            <h2 class="logo">High score</h2>
+            <h2 class="logo">Highscore</h2>
             <ol class="score-list">
             </ol>
             <footer>

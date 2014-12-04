@@ -8,18 +8,19 @@ jewel.board = (function() {
 		baseScore,
 		numJewelTypes;
 
-	function initialize(callback) {
-		settings = jewel.settings;
-		numJewelTypes = settings.numJewelTypes;
-		baseScore = settings.baseScore;
-		cols = settings.cols;
-		rows = settings.rows;
-		fillBoard();
-
-		if (callback) {
-			callback();
-		} // end of callback
-	} /* end of initialized(callback) function */
+	function initialize(startJewels, callback) {
+        settings = jewel.settings; // check for ; here
+        numJewelTypes = settings.numJewelTypes;
+        baseScore = settings.baseScore;
+        cols = settings.cols;
+        rows = settings.rows;
+        if (startJewels) {
+            jewels = startJewels;
+        } else {
+            fillBoard();
+        }
+        callback();
+    } // end of initialize function 
 
 	function fillBoard() {
 		var x, y,

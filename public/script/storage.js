@@ -3,13 +3,13 @@ jewel.storage = (function() {
 
 	function set(key, value) {
 		value = JSON.stringify(value);
-		db.setItem(key,value);
+		db.setItem(key, value);
 	} // end of set function
 
 	function get(key) {
 		var value = db.getItem(key);
 		try {
-			retrun JSON.parse(value);
+			return JSON.parse(value);
 		} catch(e) {
 			return;
 		}

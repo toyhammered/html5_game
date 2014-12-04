@@ -20,27 +20,26 @@ jewel.screens["game-screen"] = (function() {
 			endTime: 0 // time to game over
 		}; // end of gameState object
 
-		var activeGame = storage.get("activeGameData"),
-			useActiveGame,
-			startJewels;
+		var activeGame = jewel.storage.get("activeGameData"),
+            useActiveGame,
+            startJewels;
 
-		if (activeGame) {
-			useActiveGame = window.confirm(
-					"Do you want to continue your previous game?"
-				);
-			if (useActiveGame) {
-				var now = Date.now();
-				gameState.level = activeGame.level;
-				gameState.score = activeGame.score;
-				gameState.startTime = now - activeGame.time;
-				gameState.endTime = activeGame.endTime;
-				startJewels = activeGame.jewels;
-			}
+        if (activeGame) {
+            useActiveGame = window.confirm(
+                "Do you want to continue your previous game?"
+            );
+            if (useActiveGame) {
+                var now = Date.now();
+                gameState.level = activeGame.level;
+                gameState.score = activeGame.score;
+                gameState.startTime = now - activeGame.time;
+                gameState.endTime = activeGame.endTime;
+                startJewels = activeGame.jewels;
+            }
+        }
+        updateGameInfo();
+        jewel.audio.initialize();
 
-		} // end of if activeGame statement
-		updateGameInfo();
-		jewel.audio.initialize();
-		
         board.initialize(startJewels, function() {
             display.initialize(function() {
                 cursor = { x : 0, y : 0, selected : false };
@@ -56,7 +55,7 @@ jewel.screens["game-screen"] = (function() {
         paused = false;
         var overlay = jewel.dom.$("#game-screen .pause-overlay")[0];
         overlay.style.display = "none";
-	} // end of startGame function
+    } // end of startGame function 
 
 	function updateGameInfo() {
 		var $ = jewel.dom.$;
@@ -142,6 +141,7 @@ jewel.screens["game-screen"] = (function() {
 					break;
 				case "remove":
 					jewel.audio.play("match");
+					
 					display.removeJewels(boardEvent.data, next);
 					break;
 				case "refill":
@@ -168,10 +168,14 @@ jewel.screens["game-screen"] = (function() {
 	} // end of playBoardEvents function
 
 	function gameOver() {
-		jewel.storage.set("activeGameData", null);
 		jewel.audio.play("gameover");
+		jewel.storage.set("lastScore", gameState.score);
+		jewel.storage.set("activeGameData", null);
 		jewel.display.gameOver(function() {
 			announce("Game Over");
+			setTimeout(function() {
+				jewel.showScreen("high-scores");
+			}, 2500);
 		});
 	} // end of gameOver function
 
@@ -274,6 +278,16 @@ jewel.screens["game-screen"] = (function() {
 		jewel.display.resume(pauseTime);
 	} // end of resumeGame function 
 
+	function saveGameData() {
+		jewel.storage.set("activeGameData", {
+			level: gameState.level,
+			score: gameState.score,
+			time: Date.now() - gameState.startTime,
+			endTime: gameState.endTime,
+			jewels: jewel.board.getBoard()
+		}); 
+	} // end of saveGameData function 
+
 	function exitGame() {
 		pauseGame();
 		var confirmed = window.confirm(
@@ -316,15 +330,7 @@ jewel.screens["game-screen"] = (function() {
 
 
 
-	function saveGameData() {
-		jewel.storage.set("activeGameData", {
-			level: gameState.level,
-			score: gameState.score,
-			time: Date.now() - gameState.startTime,
-			endTime: gameState.endTime,
-			jewels: jewel.board.getBoard()
-		}); 
-	} // end of saveGameData function 
+	
 
 
 	return {

@@ -7,6 +7,7 @@ jewel.screens["main-menu"] = (function() {
             if (e.target.nodeName.toLowerCase() === "button") {
                 var action = e.target.getAttribute("name");
                 jewel.showScreen(action);
+
             }
         });
     }

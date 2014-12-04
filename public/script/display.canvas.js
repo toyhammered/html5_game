@@ -62,6 +62,7 @@ jewel.display = (function() {
 	function createBackgroundSnow() {
 		var backgroundSnow = document.createElement("canvas"),
 			bgSctx = backgroundSnow.getContext("2d");
+		console.log('snow created');
 
 		jewel.dom.addClass(backgroundSnow, "backgroundSnow") // might need to be just background for "" 
 
@@ -175,13 +176,17 @@ jewel.display = (function() {
 		// boardElement.appendChild(canvas); possible duplicate?
 
 		/* appending the background we just created in createBackground */
-		//boardElement.appendChild(createBackgroundSnow());
-		boardElement.appendChild(createBackground());
-		boardElement.appendChild(canvas); 
+
+	
+			//boardElement.appendChild(createBackgroundSnow());
+			boardElement.appendChild(createBackground());
+			boardElement.appendChild(canvas); 
+			previousCycle = Date.now();
+			requestAnimationFrame(cycle);
+		
 		/*-------------------------------------------------------------*/
 
-		previousCycle = Date.now();
-		requestAnimationFrame(cycle);
+		
 
 	} // end of setup function
 
@@ -260,7 +265,7 @@ jewel.display = (function() {
 			t1 = (Math.sin(time / 200) + 1) / 2,
 			t2 = (Math.sin(time / 400) + 1) /2;
 
-		console.log(x + " " + y);
+		
 		
 		clearCursor();
 
@@ -563,7 +568,7 @@ jewel.display = (function() {
         levelUp: levelUp,
         gameOver: gameOver,
         pause: pause,
-        resume: resume
+        resume: resume,
 	}; // end of return
 
 })(); // end of jewel.display function 

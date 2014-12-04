@@ -1,0 +1,36 @@
+CACHE MANIFEST
+# RWBY Gems cache manifest, rev 1
+
+public/script/audio.js
+public/script/board.js
+public/script/board.worker.js
+public/script/board.worker.interface.js
+public/script/display.canvas.js
+public/script/dom.js
+public/script/input.js
+public/script/jewel.js
+public/script/requestAnimationFrame.js
+public/script/screen.game.js
+public/script/screen.high-scores.js
+public/script/screen.install.js
+public/script/screen.main-menu.js
+public/script/screen.splash.js
+public/script/storage.js
+
+
+public/img/sprites/jewels40.svg
+public/img/install-icon.png
+
+public/fonts/rwby_font-webfont.ttf
+public/fonts/rwby_font-webfont.woff
+
+
+public/css/main.css
+public/css/mobile.css
+public/css/fontfaces.css
+*
+
+NETWORK:
+*
+
+FALLBACK:

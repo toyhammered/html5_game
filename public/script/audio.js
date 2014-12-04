@@ -29,6 +29,7 @@ jewel.audio = (function() {
 		for (i=0;i<types.length;i++) {
             if (audio.canPlayType(types[i][1]) == "maybe") {
             	
+
                 return types[i][0];
             }
         }
@@ -37,8 +38,7 @@ jewel.audio = (function() {
 
 	function createAudio(name) {
 		var el = new Audio("public/sounds/" + name + "." + extension); // check file location is correct
-
-
+		console.log(el);
 		jewel.dom.bind(el, "ended", cleanActive);
 		sounds[name] = sounds[name] || [];
 		sounds[name].push(el);
@@ -76,10 +76,7 @@ jewel.audio = (function() {
 
 	} // end of stop function
 
-	function bgMusicStop() {
-		//audio.pause("red_like_roses");
-	}
-
+	
 	
 
 
