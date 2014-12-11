@@ -1,6 +1,18 @@
 #game {
 	width: 100%;
 	height: 100%;
+    background-image: url("../img/background/rwby_chibi_mobile.png");
+}
+.screen footer button {
+    margin-left : 0.25em;
+    margin-right : 0.25em;
+    padding : 0 0.75em;
+    font-family : rwby_stylemedium, sans-serif;
+    font-size : 0.6em;
+    color : rgba(255,217,2,0.8);
+    background : rgb(10,20,0);
+    border: 0.05em solid rgb(200,51,39);
+    border-radius : 0.2em;
 }
 
 /* use a smaller base size for small screens */

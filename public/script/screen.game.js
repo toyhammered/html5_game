@@ -39,6 +39,7 @@ jewel.screens["game-screen"] = (function() {
         }
         updateGameInfo();
         jewel.audio.initialize();
+        jewel.audio.play("red_like_roses");
 
         board.initialize(startJewels, function() {
             display.initialize(function() {
@@ -140,7 +141,8 @@ jewel.screens["game-screen"] = (function() {
 					display.moveJewels(boardEvent.data, next);
 					break;
 				case "remove":
-					jewel.audio.play("match");
+					var f = Math.floor(Math.random() * 3) + 1;
+					jewel.audio.play("match" + f);
 					
 					display.removeJewels(boardEvent.data, next);
 					break;
@@ -153,7 +155,9 @@ jewel.screens["game-screen"] = (function() {
 					next()
 					break;
 				case "badswap":
-					jewel.audio.play("badswap");
+					var i = Math.floor(Math.random() * 3) + 1;
+					console.log(i);
+					jewel.audio.play("badswap" + i);
 					next();
 					break;
 				default:
@@ -169,6 +173,7 @@ jewel.screens["game-screen"] = (function() {
 
 	function gameOver() {
 		jewel.audio.play("gameover");
+		jewel.audio.pause();
 		jewel.storage.set("lastScore", gameState.score);
 		jewel.storage.set("activeGameData", null);
 		jewel.display.gameOver(function() {
@@ -276,6 +281,7 @@ jewel.screens["game-screen"] = (function() {
 		gameState.startTime += pauseTime;
 		setLevelTimer();
 		jewel.display.resume(pauseTime);
+
 	} // end of resumeGame function 
 
 	function saveGameData() {
@@ -295,6 +301,7 @@ jewel.screens["game-screen"] = (function() {
 		);
 		if (confirmed) {
 			saveGameData();
+			jewel.audio.pause();
 			jewel.showScreen("main-menu");
 
 		} else {

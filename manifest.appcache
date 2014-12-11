@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# RWBY Gems cache manifest, rev 1
+# RWBY Gems cache manifest, rev 2
 
 CACHE:
 public/script/audio.js
@@ -29,9 +29,5 @@ public/fonts/rwby_font-webfont.woff
 public/css/main.css
 public/css/mobile.css
 public/css/fontfaces.css
-*
-
-NETWORK:
-*
 
 FALLBACK:

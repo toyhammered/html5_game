@@ -14,9 +14,10 @@ body {
     top : 0;
     width : 8em;
     height : 12em;
-    font-family : Geo;
-    color : rgb(200,200,100);
+    font-family : rwby_stylemedium, sans-serif;
+    color: rgb(200,51,39);
     font-size : 40px;
+    background-image: url("../img/background/rwby_chibi.png");
     background-color: #d3d3d3;
     /*
     
@@ -37,6 +38,8 @@ body {
         linear-gradient(45deg, transparent 0%, rgb(20,20,20) 25%, transparent 50%, rgb(20,20,20) 75%, transparent 100%),
         linear-gradient(-45deg, transparent 0%, rgb(20,20,20) 25%, transparent 50%, rgb(20,20,20) 75%, transparent 100%);
         */
+
+
 }
 
 #game .screen {
@@ -58,8 +61,10 @@ body {
     padding-top: 2.5em;
 }
 #splash-screen .continue {
+    padding-top:0.2em;
     cursor: pointer;
     font-size: 0.75em;
+
     display: none;
 }
 
@@ -70,11 +75,14 @@ body {
     height: 0.5em;
     border-radius: 0.5em;
     overflow: hidden;
-    border: 1px solid rgb(200,200,100);
+    border: 1px solid black;
 }
 
 .progress .indicator {
-    background-color: rgb(200,200,100);
+        background:
+                -webkit-linear-gradient(45deg, transparent, transparent 33%, rgba(255, 255, 255, 0.1) 33%, rgba(255, 255, 255, 0.1) 66%, transparent 66%),
+                -webkit-linear-gradient(top, rgba(255,217,2, 0.5), rgba(0, 0, 0, 0.2)),
+                -webkit-linear-gradient(left, rgb(200,51,39), #ba7448);
     height: 100%;
     width: 0%;
 }
@@ -95,11 +103,8 @@ body {
 /* logo for game */
 
 h1.logo {
-    font-family: rwby_stylemedium;
+    font-family: rwby_stylemedium, sans-serif;
     line-height: 0.9em;
-    text-shadow: 0.03em  0.03em  0.03em rgb(255,255,0),
-                 -0.03em -0.03em  0.03em rgb(255,255,0),
-                  0.10em  0.15em  0.15em rgb(0,0,0);
     
     margin: 0;
     text-align: center;
@@ -111,7 +116,7 @@ h1.logo {
 span.red {
     font-size: 1.5em;
     color: rgb(200,51,39);
-     text-shadow: 0.03em  0.03em  0.03em rgb(128,71,54),
+     text-shadow: 0.01em  0.01em  0.01em rgb(128,71,54),
                  -0.03em -0.03em  0.03em rgb(128,71,54),
                   0.10em  0.15em  0.15em rgb(0,0,0);
     margin-left:2px;
@@ -158,6 +163,14 @@ span.yellow {
 
 span.gems {
     font-size:1em;
+    color: rgb(200,51,39);
+     text-shadow: 0.01em  0.01em  0.01em rgb(128,71,54),
+                 -0.03em -0.03em  0.03em rgb(128,71,54),
+                  0.10em  0.15em  0.15em rgb(0,0,0);
+     
+    margin-left:2px;
+    margin-right:13px;
+    display:inline-block;
 }
 
 /* end of logo styling */
@@ -180,18 +193,19 @@ ul.menu li {
 ul.menu li button {
     font-family: rwby_stylemedium, sans-serif;
     font-size: 0.6em;
-    color: rgb(100,120,0);
+    color: rgb(255,217,2);
     width: 10em;
     height: 1.5em;
     background: rgb(10,20,0);
-    border: 0.1em solid rgb(255,255,0);
+    border: 0.1em solid rgb(200,51,39);
     border-radius: 0.5em;
     /*-webkit-box-shadow: 0.2em 0.2em 0.3em rgb(0,0,0);
     -moz-box-shadow: 0.2em 0.2em 0.3em rgb(0,0,0); */
     box-shadow: 0.2em 0.2em 0.3em rgb(0,0,0);
+    line-height: 30px;
 }
 ul.menu li button:hover {
-    background: rgb(30,40,0);
+    background: rgb(94,0,1);
 }
 ul.menu li button:active {
     color : rgb(255,255,0);
@@ -243,18 +257,22 @@ ul.menu li button:active {
     width: 100%;
     text-align: center;
     margin-top: 50%;
-    font-family: Slackey;
-    font-size: 1.0em;
-    text-shadow : 0.03em  0.03em  0.03em rgb(255,255,0),
-                 -0.03em -0.03em  0.03em rgb(255,255,0),
+    font-family: rwby_stylemedium, sans-serif;
+    font-size: 1.5em;
+    color: rgb(255,217,2);
+    text-shadow: 0.03em  0.03em  0.03em rgb(136,124,48),
+                 -0.03em -0.03em  0.03em rgb(136,124,48),
                   0.10em  0.15em  0.15em rgb(0,0,0);
-    color: rgb(70,120,20);
+    text-stroke: 0.5px black;
 }
 
 /* Game screen - Game state */
 #game-screen .game-info {
     width: 100%;
     float: left;
+    background: rgba(255,217,2,0.5);
+    height:25px;
+    margin-bottom:25px;
 }
 
 #game-screen .game-info label {
@@ -263,6 +281,7 @@ ul.menu li button:active {
     float: left;
     font-size: 0.6em;
     padding: 0.25em;
+    color:black;
 }
 
 #game-screen .game-info .score {
@@ -292,11 +311,11 @@ ul.menu li button:active {
     margin-left : 0.25em;
     margin-right : 0.25em;
     padding : 0 0.75em;
-    font-family : Geo, sans-serif;
-    font-size : 0.5em;
-    color : rgba(200,200,100,0.5);
+    font-family : rwby_stylemedium, sans-serif;
+    font-size : 0.55em;
+    color : rgba(255,217,2,0.8);
     background : rgb(10,20,0);
-    border : 1px solid rgba(200,200,100,0.5);
+    border: 0.05em solid rgb(200,51,39);
     border-radius : 0.2em;
 }
 
@@ -315,11 +334,12 @@ ul.menu li button:active {
     margin-top: -0.5em;
     width: 100%;
 
-    font-family: Slackey, sans-serif;
-    color: rgb(150,150,75);
-    text-shadow: 0.03em 0.03em 0.03em rgb(255,255,0),
-                 -0.03em -0.03em 0.03em rgb(255,255,0),
-                 0.1em 0.15em 0.15em rgb(0,0,0);
+    font-family: rwby_stylemedium, sans-serif;
+    color: rgb(255,217,2);
+    text-shadow: 0.03em  0.03em  0.03em rgb(136,124,48),
+                 -0.03em -0.03em  0.03em rgb(136,124,48),
+                  0.10em  0.15em  0.15em rgb(0,0,0);
+    text-stroke: 0.5px black;
     text-align: center;
     white-space: nowrap;
 
@@ -348,6 +368,9 @@ ul.menu li button:active {
 #high-scores h2 {
     margin-top: 0.25em;
     font-size: 1.25em;
+    text-align: center;
+    background: rgba(255,217,2,0.5);
+    text-stroke: 0.5px black;
 }
 
 #high-scores ol.score-list {

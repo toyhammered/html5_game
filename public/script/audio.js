@@ -39,10 +39,17 @@ jewel.audio = (function() {
 	function createAudio(name) {
 		var el = new Audio("public/sounds/" + name + "." + extension); // check file location is correct
 		console.log(el);
-		jewel.dom.bind(el, "ended", cleanActive);
-		sounds[name] = sounds[name] || [];
-		sounds[name].push(el);
+		//alert(el);
 
+		if (name == "red_like_roses"){
+			backgroundMusic = el;
+			backgroundMusic.volume = 0.3;
+		} else {
+			jewel.dom.bind(el, "ended", cleanActive);
+			sounds[name] = sounds[name] || [];
+			sounds[name].push(el);
+		}
+	
 		return el;
 
 	} // end of createAudio function
@@ -77,7 +84,9 @@ jewel.audio = (function() {
 	} // end of stop function
 
 	
-	
+	function pause() {
+		backgroundMusic.pause();
+	}
 
 
 	function cleanActive() {
@@ -95,7 +104,8 @@ jewel.audio = (function() {
 	return {
 		initialize: initialize,
 		play: play,
-		stop: stop
+		stop: stop,
+		pause: pause
 	};
 
 })(); // end of jewel.audio function

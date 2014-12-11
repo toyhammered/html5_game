@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html manifest="cache.appcache" lang="en-US">
+	<html manifest="manifest.appcache" lang="en-US">
 	<head>
 		<meta charset="UTF-8">
 		<title> RWBY Gems </title>
@@ -76,6 +76,7 @@
 		<script>
         window.addEventListener("load", function() {
             jewel.load("public/script/dom.js");
+            
 
             if (jewel.isStandalone()) {
                 jewel.load("public/script/screen.splash.js", jewel.setup);
@@ -163,6 +164,9 @@
 				<footer>
 					<button class="back">Back</button>
 				</footer>
+			</div>
+			<div id="backgroundDiv">
+
 			</div>
 
 			 

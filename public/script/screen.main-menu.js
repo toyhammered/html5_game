@@ -15,6 +15,7 @@ jewel.screens["main-menu"] = (function() {
 		if (firstRun) {
 			setup();
 			firstRun = false;
+
 		} // end of firstRun if statement
 	} // end of function run
 

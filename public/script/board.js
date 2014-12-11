@@ -30,12 +30,12 @@ jewel.board = (function() {
 		for (x=0; x < cols; x++) {
 			jewels[x] = [];
 			for (y=0; y < rows; y++) {
-				type = randomJewel();
+				type = ChoseRandomJewel();
 				while ((type === getJewel(x-1, y) &&
 						type === getJewel(x-2, y )) ||
 						(type === getJewel(x, y-1) &&
 						type === getJewel(x, y-2))) {
-					type = randomJewel();
+					type = ChoseRandomJewel();
 				} // end of while loop to check for chains (3 in a row) during startup
 				jewels[x][y] = type;
 			} // end of rows for loop
@@ -48,7 +48,12 @@ jewel.board = (function() {
 	} /* end of fillBoard function */
 
 
-	function randomJewel() {
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+/**********Changed randomJewel Function************/
+
+	function ChoseRandomJewel() { // randomJewel original
 		return Math.floor(Math.random() * numJewelTypes);
 	} /* end of randomJewel function */
 
@@ -170,7 +175,7 @@ jewel.board = (function() {
         for (x = 0; x < cols; x++) {
             // fill from top
             for (y = 0; y < gaps[x]; y++) {
-                jewels[x][y] = randomJewel();
+                jewels[x][y] = ChoseRandomJewel();
                 moved.push({
                     toX : x, toY : y,
                     fromX : x, fromY : y - gaps[x],
@@ -208,12 +213,18 @@ jewel.board = (function() {
         }
     } // end of check function 
 
+
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+/**********Changed Swap Function************/
+
 	// if possible, swaps (x1,y1) and (x2,y2) and
     // calls the callback function with list of board events
-    function swap(x1, y1, x2, y2, callback) {
-        var tmp, swap1, swap2,
-            events = [];
-        swap1 = {
+    function swapValidation(x1, y1, x2, y2, callback) {
+        var tmpValidation, swapValidation1, swapValidation2,
+            AddEventstoCheck = [];
+        swapValidation1 = {
             type : "move",
             data : [{
                 type : getJewel(x1, y1),
@@ -223,7 +234,7 @@ jewel.board = (function() {
                 fromX : x2, fromY : y2, toX : x1, toY : y1
             }]
         };
-        swap2 = {
+        swapValidation2 = {
             type : "move",
             data : [{
                 type : getJewel(x2, y2),
@@ -234,16 +245,16 @@ jewel.board = (function() {
             }]
         };
         if (isAdjacent(x1, y1, x2, y2)) {
-            events.push(swap1);
+            AddEventstoCheck.push(swapValidation1);
             if (canSwap(x1, y1, x2, y2)) {
-                tmp = getJewel(x1, y1);
+                tmpValidation = getJewel(x1, y1);
                 jewels[x1][y1] = getJewel(x2, y2);
-                jewels[x2][y2] = tmp;
-                events = events.concat(check());
+                jewels[x2][y2] = tmpValidation;
+                AddEventstoCheck = AddEventstoCheck.concat(check());
             } else {
-                events.push(swap2, {type : "badswap"});
+                AddEventstoCheck.push(swapValidation2, {type : "badswap"});
             }
-            callback(events);
+            callback(AddEventstoCheck);
         }
     } // end of swap function 
 
@@ -298,7 +309,7 @@ jewel.board = (function() {
 	return {
 		/* exposed functions go here */
 		initialize : initialize,
-        swap : swap,
+        swap : swapValidation,
         canSwap : canSwap,
         getBoard : getBoard,
         print : print
