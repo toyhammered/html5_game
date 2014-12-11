@@ -1,5 +1,5 @@
 #---------------------------
-# <Name of Game> version 1.0
+# RWGY GEMS version 1.0
 # Just the boilerplate
 # Daniel Rassiner 10.2014
 #---------------------------
@@ -37,48 +37,56 @@ end of Chapter 1 Examples of new HTML 5 Features
 #-------------- Global File Locations ----------------#
 
 CSS Styles Location:
-	- Main CSS: 		public/css/main.css
-	- Fontface: 		public/css/fontfaces.css
-	- Mobile: 			public/css/mobile.css	
+	- Main CSS: 						public/css/main.css
+	- Fontface: 						public/css/fontfaces.css
+	- Mobile: 							public/css/mobile.css	
 
 JS file Location:
-	- Jewel:			public/script/jewel.js
-	- Dom: 				public/script/dom.js
-	- Install:			public/script/screen.install.js
-	- Main-Menu:		public/script/screen.main-menu.js
-	- Splash-Screen:	public/script/screen.splash.js
-	- Board:			public/script/board.js
-	- Game: 			public/script/game.js
+	- Audio:							public/script/audio.js
+	- Board:							public/script/board.js
+	- Board.worker-interface:			public/script/board.worker-interface.js
+	- Board.worker:						public/script/board.worker.js
+	- Display.canvas:					public/script/display.canvas.js
+	- Dom:								public/script/dom.js
+	- Game:								public/script/game.js
+	- Input:							public/script/input.js
+	- Jewel:							public/script/jewel.js
+	- RequestAnimationFrame:			public/script/requestAnimationFrame.js
+	- Screen.game:						public/script/screen.game.js
+	- Screen.high-scores:				public/script/screen.high-scores.js
+	- Screen.install:					public/script/screen.install.js
+	- Screen.main-menu:					public/script/screen.main-menu.js
+	- Screen.splash:					public/script/screen.splash.js
+	- Storage:							public/script/storage.js
 
 Img file Location:
-	- Icons-Folder		public/img/icons
-	- iOS-startup		public/img/ios_startup	
-
-
-
-
-
-
-
-
-
-#-----------------------------------------------------#
-
-#-----------------------------------------------------#
-#------------ Customizations to be Added -------------#
-
-Inside div (#game) - index.html
-	- Need to add my own game name
-
-Inside main.css - index.html game customization
-	- customize fonts
-	- logo
-	- everything related to the home screen
-
-Inside main.css - main menu styles
-	- customize the main menu
-
 	
+	- install-icon:						public/img/install-icon.png
+
+	- background:						public/img/background
+		- rwby_chibi:					public/img/background/rwby_chibi.png
+		- rwby_chibi_mobile:			public/img/background/rwby_chibi_mobile.png
+
+	- icons:							public/img/icons
+		- Apple-Touch:					public/img/icons/*All Apple Touch Icons here*
+		- Favicon:						public/img/icons/*All Favicon Icons here*
+		- Mstile:						public/img/icons/*All Mstile Icons here*
+
+		- ios_startup
+			- all ios startups are in here
+
+		- sprites
+			- jewels					public/img/icons/sprites/jewels.svg
+
+Sounds file Location:
+
+	- sounds:							public/sounds
+		- All game sounds are in here
+
+Fonts file Location:
+	
+	- rwby_font:						public/fonts/rwby_font
+		- All files including eot, svg, ttf, woff here
 
 
 #-----------------------------------------------------#
@@ -705,12 +713,40 @@ Chapter 7 End Creating the Game Display
 
 Chapter 8 Start Interacting with the Game
 
+Summary:
+		- Capturing user Input
+		- Working with touch events
+		- Binding inputs to actions
+		- Adding visual feedback to actions
+	end
+
 Chapter 8 End Interacting with the Game
 
 
+Chapter 9 Start Animating Game Graphics
+
+Summary:
+		- Creating animation cycles
+		- Making animations for game actions
+		- Adding score and level UI elements
+		- Animating the game timer
+	end
+
+Chapter 9 End Animating Game Graphics
 
 
+Chapter 12 Start Local Storage and Caching
 
+
+Summary:
+		- Introducing Web Storage 
+		- Storing data in cookies versus in local storage
+		- Adding persistent data to the game
+		- Making a high score list
+		- Enabling offline play with application caching
+	end
+
+Chapter 12 End Local Storage and Caching
 
 
 

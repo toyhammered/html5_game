@@ -1,0 +1,20 @@
+/* HUMANSTXT.ORG */
+
+
+    /* TEAM */
+    	Creator: Daniel Rassiner
+    	Site: html5game.drassiner.com / Daniel@Rassiner.com
+    	Location: Los Angeles, California, USA.
+						
+
+    /* THANKS */
+	    Name: Monty Oum, RWBY belongs to him
+    	Name: Heuring,  Website: http://heuring.deviantart.com/art/RWBY-chibi-379302923
+        Name: lightning-in-my-hand,   Website: http://lightning-in-my-hand.deviantart.com/art/RWBY-Font-431043968
+	
+                        
+
+    /* DISCLAIMER */
+    	Totally don’t sue me for any of this copyright stuff, this is a non-profit student 	made game for class. If there are any issues at all my email is above! I own none 	of the artwork, sound effects or background music of this game!
+
+                    

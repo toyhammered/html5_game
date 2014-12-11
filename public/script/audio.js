@@ -40,7 +40,8 @@ jewel.audio = (function() {
 		var el = new Audio("public/sounds/" + name + "." + extension); // check file location is correct
 		console.log(el);
 		//alert(el);
-
+		
+		
 		if (name == "red_like_roses"){
 			backgroundMusic = el;
 			backgroundMusic.volume = 0.3;
