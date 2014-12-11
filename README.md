@@ -37,11 +37,13 @@ end of Chapter 1 Examples of new HTML 5 Features
 #-------------- Global File Locations ----------------#
 
 CSS Styles Location:
+
 	- Main CSS: 						public/css/main.css
 	- Fontface: 						public/css/fontfaces.css
 	- Mobile: 							public/css/mobile.css	
 
 JS file Location:
+
 	- Audio:							public/script/audio.js
 	- Board:							public/script/board.js
 	- Board.worker-interface:			public/script/board.worker-interface.js
