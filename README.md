@@ -704,6 +704,7 @@ Chapter 7 Start Creating the Game Display
 
 
 	Summary:
+	
 	    - created the game display 
 	    - rendering the sprites
 	    - adding the pause/resume functionality/screen dimming
@@ -716,6 +717,7 @@ Chapter 7 End Creating the Game Display
 Chapter 8 Start Interacting with the Game
 
 Summary:
+
 		- Capturing user Input
 		- Working with touch events
 		- Binding inputs to actions
@@ -728,6 +730,7 @@ Chapter 8 End Interacting with the Game
 Chapter 9 Start Animating Game Graphics
 
 Summary:
+
 		- Creating animation cycles
 		- Making animations for game actions
 		- Adding score and level UI elements
@@ -741,6 +744,7 @@ Chapter 12 Start Local Storage and Caching
 
 
 Summary:
+
 		- Introducing Web Storage 
 		- Storing data in cookies versus in local storage
 		- Adding persistent data to the game
